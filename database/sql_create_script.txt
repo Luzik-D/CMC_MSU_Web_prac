@@ -1,0 +1,64 @@
+--DROP TABLE "Client history record", "Copy", Film, Client;
+
+CREATE TABLE Client (
+	"id" SERIAL PRIMARY KEY,
+	"name" TEXT,
+	phone CHAR(11),
+	address TEXT
+);
+
+CREATE TABLE Film (
+	"id" SERIAL PRIMARY KEY,
+	title TEXT,
+	company TEXT,
+	director TEXT,
+	year_of_release CHAR(4),
+	description TEXT
+);
+
+CREATE TABLE "Copy" (
+	"id" SERIAL PRIMARY KEY,
+	film_id INT,
+	"type" TEXT,
+	"status" TEXT,
+	price INT,
+	FOREIGN KEY (film_id) REFERENCES Film("id")
+);
+
+CREATE TABLE "Client history record" (
+	"id" SERIAL PRIMARY KEY,
+	client_id INT,
+	copy_id INT,
+	date_of_transfer TIMESTAMP,
+	date_of_receipt TIMESTAMP,
+	actual_date_of_receipt TIMESTAMP,
+	transfer_amount INT,
+	FOREIGN KEY (client_id) REFERENCES Client("id"),
+	FOREIGN KEY (copy_id) REFERENCES "Copy"("id")
+);
+
+COPY Client("name", phone, address)
+FROM 'D:\MSU\OPs\database\test_inputs\client_table.txt';
+
+COPY Film(title, company, director, year_of_release, description)
+FROM 'D:\MSU\OPs\database\test_inputs\film_table.txt';
+
+COPY "Copy"(film_id, "type", "status", price)
+FROM 'D:\MSU\OPs\database\test_inputs\copy_table.txt';
+
+COPY "Client history record"(client_id, copy_id, date_of_transfer, date_of_receipt,
+							 actual_date_of_receipt, transfer_amount)
+FROM 'D:\MSU\OPs\database\test_inputs\client_history_table.txt';
+
+--tests
+SELECT * FROM Client;
+SELECT * FROM Film;
+SELECT * FROM "Copy";
+SELECT * FROM "Client history record";
+SELECT * 
+	FROM "Client history record" as his
+		JOIN "Copy" as cpy
+			ON his.copy_id = cpy.id
+		JOIN Film as f
+			ON cpy.film_id = f.id
+	
