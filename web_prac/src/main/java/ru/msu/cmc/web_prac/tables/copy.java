@@ -15,11 +15,11 @@ public class Copy {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false, name = "id")
-    private Long id;
+    private Long copyId;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id")
-    private Film film_id;
+    private Film filmId;
 
     @Column(nullable = false, name = "type")
     private String type;

@@ -14,15 +14,15 @@ private class ClientHistoryRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false, name = "id")
-    private Long id;
+    private Long recordId;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id")
-    private Client client_id;
+    private Client clientId;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id")
-    private Copy copy_id;
+    private Copy copyId;
 
     @Column(nullable = false, name = "date_of_transfer")
     private String dateOfTransfer;

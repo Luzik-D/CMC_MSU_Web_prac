@@ -14,7 +14,7 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false, name = "id")
-    private Long id;
+    private Long clientId;
 
     @Column(nullable = false, name = "name")
     private String name;

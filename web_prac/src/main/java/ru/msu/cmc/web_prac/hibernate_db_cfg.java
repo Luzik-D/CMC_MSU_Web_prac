@@ -1,5 +1,5 @@
 @Configuration
-@PropertySource("classpath:app.properties")
+@PropertySource("classpath:application.properties")
 public class HibernateDBCfg {
     @Value("org.postgresql.Driver")
     private String DB_DRIVER;

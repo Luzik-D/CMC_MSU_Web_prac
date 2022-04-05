@@ -14,7 +14,7 @@ public class Films {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false, name = "id")
-    private Long id;
+    private Long filmId;
 
     @Column(nullable = false, name = "title")
     private String title;
