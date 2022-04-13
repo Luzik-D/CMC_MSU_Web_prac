@@ -1,6 +1,6 @@
-package web_prac.tables;
+package ru.cs.msu.web_prac.tables;
 
-import  lombok.*;
+import lombok.*;
 import javax.persistence.*;
 
 @Entity
@@ -9,12 +9,12 @@ import javax.persistence.*;
 @Setter
 @ToString
 @NoArgsConstructor
-
-public class Films {
+@AllArgsConstructor
+public class Films implements AbstractEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false, name = "id")
-    private Long filmId;
+    private Long id;
 
     @Column(nullable = false, name = "title")
     private String title;

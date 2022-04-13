@@ -1,3 +1,15 @@
+package ru.cs.msu.web_prac;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+
+import javax.sql.DataSource;
+import java.util.Properties;
+
 @Configuration
 @PropertySource("classpath:application.properties")
 public class HibernateDBCfg {
@@ -14,7 +26,7 @@ public class HibernateDBCfg {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(oraDataSource());
-        sessionFactory.setPackagesToScan("web_prac.tables");
+        sessionFactory.setPackagesToScan("ru.cs.msu.web_prac.tables");
 
         Properties hibProperties = new Properties();
         hibProperties.setProperty("hibernate.hbm2ddl.auto", "update");

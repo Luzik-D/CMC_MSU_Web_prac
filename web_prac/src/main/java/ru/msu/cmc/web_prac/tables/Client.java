@@ -1,4 +1,4 @@
-package web_prac.tables;
+package ru.cs.msu.web_prac.tables;
 
 import lombok.*;
 import javax.persistence.*;

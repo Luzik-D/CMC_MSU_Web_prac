@@ -1,4 +1,4 @@
-package web_prac.tables;
+package ru.cs.msu.web_prac.tables;
 
 import lombok.*;
 import javax.persistence.*;
@@ -10,7 +10,7 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-private class ClientHistoryRecord {
+public class ClientHistoryRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(nullable = false, name = "id")

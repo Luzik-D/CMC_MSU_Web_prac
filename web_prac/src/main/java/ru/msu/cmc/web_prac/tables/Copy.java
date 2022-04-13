@@ -1,7 +1,7 @@
-package web_prac.tables;
+package ru.cs.msu.web_prac.tables;
 
 import lombok.*;
-import javax.persistnence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Copy")
@@ -19,7 +19,7 @@ public class Copy {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id")
-    private Film filmId;
+    private Films filmId;
 
     @Column(nullable = false, name = "type")
     private String type;
