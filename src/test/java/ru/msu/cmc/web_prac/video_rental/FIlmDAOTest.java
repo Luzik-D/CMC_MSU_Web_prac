@@ -26,9 +26,15 @@ public class FIlmDAOTest {
     private SessionFactory sessionFactory;
 
     @Test
-    public void simpleTest() throws Exception {
+    public void getFilmById() throws Exception {
         Film film = filmDAO.getFilmById(4);
         assertEquals("Columbia Pictures", film.getCompany());
+    }
+
+    @Test
+    public void getAllFilms() throws Exception {
+        List<Film> filmList = filmDAO.getAll();
+        assertEquals(4, filmList.size());
     }
 
 }

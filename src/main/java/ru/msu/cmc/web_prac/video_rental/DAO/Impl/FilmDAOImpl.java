@@ -42,9 +42,10 @@ public class FilmDAOImpl implements FilmDAO {
 
     @Override
     public List<Film> getAll() {
-        Session session = sessionFactory.openSession();
-        List<Film> filmList = session.createQuery("SELECT title FROM Film").list();
-
-        return filmList;
+        try( Session session = sessionFactory.openSession()) {
+            List<Film> filmList = session.createQuery("SELECT title FROM Film").list();
+            logger.info("Get all films");
+            return filmList;
+        }
     }
 }
