@@ -6,6 +6,10 @@ import java.util.List;
 
 /* methods for working with table "Film" */
 public interface FilmDAO {
-    public Film getFilmById(int id);
+    Film getById(int id);
     public List<Film> getAll();
+
+    void update(Film film);
+    void delete(Film film);
+    void save(Film film);
 }

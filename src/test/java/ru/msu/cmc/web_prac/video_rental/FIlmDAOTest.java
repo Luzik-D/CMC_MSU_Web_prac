@@ -3,6 +3,7 @@ package ru.msu.cmc.web_prac.video_rental;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,7 +19,6 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class FIlmDAOTest {
-    @Qualifier("filmDAOImpl")
     @Autowired
     private FilmDAO filmDAO;
 
@@ -27,7 +27,7 @@ public class FIlmDAOTest {
 
     @Test
     public void getFilmById() throws Exception {
-        Film film = filmDAO.getFilmById(4);
+        Film film = filmDAO.getById(4);
         assertEquals("Columbia Pictures", film.getCompany());
     }
 

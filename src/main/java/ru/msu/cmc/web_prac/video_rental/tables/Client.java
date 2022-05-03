@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class Client implements AbstractTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "client_id", nullable = false)
     private int id;
 
     @Column(name = "name", nullable = false)
@@ -28,7 +28,4 @@ public class Client implements AbstractTable {
     @Column(name = "address", nullable = false)
     private String address;
 
-    public int getId() {
-        return this.id;
-    }
 }

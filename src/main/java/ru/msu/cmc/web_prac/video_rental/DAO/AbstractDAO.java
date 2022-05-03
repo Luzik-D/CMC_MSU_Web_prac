@@ -6,6 +6,10 @@ import java.util.List;
 
 /* all DAO classes have same methods */
 public interface AbstractDAO<T extends AbstractTable> {
-    public T getById(int id);
+    T getById(int id);
     List<T> getAll();
+
+    void update(T entity);
+    void delete(T entity);
+    void save(T entity);
 }

@@ -13,19 +13,19 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class ClientHistoryRecord {
+public class ClientHistoryRecord implements AbstractTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "history_id", nullable = false)
     private int id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @MapsId
-    private Client clientId;
+    @JoinColumn(name = "client_id")
+    private Client client;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @MapsId
-    private Copy copyId;
+    @JoinColumn(name = "copy_id")
+    private Copy copy;
 
     @Column(name = "date_of_transfer", nullable = false)
     private String dateOfTransfer;

@@ -62,4 +62,35 @@ public abstract class AbstractDAOImpl<T extends AbstractTable> implements Abstra
             return entityList;
         }
     }
+
+    @Override
+    public void update(T entity) {
+        try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.update(entity);
+            session.getTransaction().commit();
+        }
+    }
+
+    @Override
+    public void delete(T entity) {
+        try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.delete(entity);
+            session.getTransaction().commit();
+        }
+    }
+
+    @Override
+    public void save(T entity) {
+        try(Session session = sessionFactory.openSession()) {
+            // check if already exists
+            if(entity.getId() != 0) {
+                entity.setId(0);
+            }
+            session.beginTransaction();
+            session.saveOrUpdate(entity);
+            session.getTransaction().commit();
+        }
+    }
 }

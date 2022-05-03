@@ -15,9 +15,9 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Film {
+public class Film implements AbstractTable {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "film_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 

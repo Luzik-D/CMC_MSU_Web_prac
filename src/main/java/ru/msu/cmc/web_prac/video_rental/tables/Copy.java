@@ -13,14 +13,14 @@ import java.security.GeneralSecurityException;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Copy {
+public class Copy implements AbstractTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "copy_id", nullable = false)
     private int id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @MapsId
+    @JoinColumn(name = "film_id")
     private Film film_id;
 
     @Column(name = "type", nullable = false)
