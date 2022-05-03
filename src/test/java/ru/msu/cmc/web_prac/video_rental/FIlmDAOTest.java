@@ -15,6 +15,7 @@ import ru.msu.cmc.web_prac.video_rental.tables.Film;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -35,6 +36,17 @@ public class FIlmDAOTest {
     public void getAllFilms() throws Exception {
         List<Film> filmList = filmDAO.getAll();
         assertEquals(4, filmList.size());
+    }
+
+    @Test
+    public void getFilmByTitle() throws Exception {
+        // should be not empty
+        List<Film> filmList = filmDAO.getFilmsByTitle("Брат");
+        assertNotEquals(null, filmList);
+
+        //should be empty
+        filmList = filmDAO.getFilmsByTitle("test");
+        assertEquals(null, filmList);
     }
 
 }

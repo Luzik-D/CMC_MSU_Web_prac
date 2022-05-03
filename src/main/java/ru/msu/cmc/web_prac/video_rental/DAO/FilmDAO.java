@@ -12,4 +12,10 @@ public interface FilmDAO {
     void update(Film film);
     void delete(Film film);
     void save(Film film);
+
+    // methods for filter
+    List<Film> getFilmsByTitle(String title);
+    List<Film> getFilmsByCompany(String company);
+    List<Film> getFilmsByDirector(String director);
+    List<Film> getFilmsByYear(String year);
 }

@@ -38,6 +38,10 @@ public abstract class AbstractDAOImpl<T extends AbstractTable> implements Abstra
         this.sessionFactory = sessionFactory.getObject();
     }
 
+    public SessionFactory getSessionFactory() {
+        return this.sessionFactory;
+    }
+
     @Override
     public T getById(int id) {
         try(Session session = sessionFactory.openSession()) {
