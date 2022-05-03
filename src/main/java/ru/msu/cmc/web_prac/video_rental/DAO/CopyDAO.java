@@ -9,16 +9,11 @@ public interface CopyDAO {
     Copy getById(Integer id);
     public List<Copy> getAll();
 
-    //filter methods
-    List<Copy> getByFilmId(Integer filmId);
-    List<Copy> getCopyByType(String type);
-    List<Copy> getCopyByStatus(String status);
-    List<Copy> getCopyByPrice(int price);
-
-    Film getFilm();
-
     //update, delete and save
     void update(Copy copy);
     void delete(Copy copy);
     void save(Copy copy);
+
+    //filter method
+    List<Copy> findCopy(Integer filmId, String type, String status, Integer price);
 }

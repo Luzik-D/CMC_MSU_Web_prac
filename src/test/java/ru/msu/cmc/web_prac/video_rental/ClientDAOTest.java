@@ -106,7 +106,7 @@ public class ClientDAOTest {
         List<Client> afterDel = clientDAO.getClientByName("Viktor");
         assertEquals(null, afterDel);
 
-        //try to delete non exist client
+        //delete non existing client
         client = new Client("Viktor", "123", "test");
         clientDAO.delete(client);
         afterDel = clientDAO.getAll();

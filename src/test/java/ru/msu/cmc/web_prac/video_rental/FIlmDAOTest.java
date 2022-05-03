@@ -102,6 +102,12 @@ public class FIlmDAOTest {
         List<Film> testDelete = filmDAO.getFilmsByTitle("web");
         assertEquals(null,  testDelete);
 
+        //delete non existing film
+        newFilm = new Film( "web", "www", "me", "2022", "descr");
+        filmDAO.delete(newFilm);
+        assertEquals(4, filmDAO.getAll().size());
+
+
     }
 
     //test filter

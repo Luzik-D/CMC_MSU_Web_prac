@@ -68,7 +68,10 @@ public class FilmDAOImpl extends AbstractDAOImpl<Film> implements FilmDAO {
             // create path for dynamic filter query
             List<Predicate> predicates = new ArrayList<>();
             if(title != null) {
-                predicates.add(cb.equal(root.get("title"), title));
+                //create LIKE expr
+                String sqlTitle = "%" + title + "%";
+
+                predicates.add(cb.like(root.get("title"), title));
             }
             if(company != null) {
                 predicates.add(cb.equal(root.get("company"), company));

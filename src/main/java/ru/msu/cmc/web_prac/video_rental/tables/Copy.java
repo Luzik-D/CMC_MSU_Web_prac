@@ -21,7 +21,7 @@ public class Copy implements AbstractTable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "film_id")
-    private Film film_id;
+    private Film film;
 
     @Column(name = "type", nullable = false)
     private String type;
@@ -31,4 +31,11 @@ public class Copy implements AbstractTable {
 
     @Column(name = "price", nullable = false)
     private int price;
+
+    public Copy(Film film, String type, String status, int price) {
+        this.film = film;
+        this.type = type;
+        this.status = status;
+        this.price = price;
+    }
 }
