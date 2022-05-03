@@ -1,7 +1,7 @@
 CREATE TABLE Client (
                         client_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                         name TEXT NOT NULL,
-                        phone CHAR(11) NOT NULL,
+                        phone CHAR(11) NOT NULL UNIQUE,
                         address TEXT NOT NULL
 );
 
@@ -41,6 +41,7 @@ INSERT INTO Client (name, phone, address) VALUES('Иванов Алексей М
 INSERT INTO Client (name, phone, address) VALUES('Петров Иван Алексеевич', '89161448984', 'г. Москва, ул. Тверская, д. 4' );
 INSERT INTO Client (name, phone, address) VALUES('Алексеев Петр Иванович', '89148969666', 'г. Москва, ул. 1-я Владимирская, д. 45');
 INSERT INTO Client (name, phone, address) VALUES('Абрамов Дмитрий Евгеньевич', '89166768558', 'г. Москва, ул. Первомайская, д 19');
+INSERT INTO Client (name, phone, address) VALUES('Лузик Дмитрий Евгеньевич', '77777777777', 'г. Москва');
 
 /* INTO Film table */
 INSERT INTO Film(title, company, director, year_of_release, description)

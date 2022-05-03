@@ -22,10 +22,15 @@ public class Client implements AbstractTable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "phone", nullable = false)
+    @Column(name = "phone", nullable = false, unique = true)
     private String phone;
 
     @Column(name = "address", nullable = false)
     private String address;
 
+    public Client(String name, String phone, String address) {
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+    }
 }
