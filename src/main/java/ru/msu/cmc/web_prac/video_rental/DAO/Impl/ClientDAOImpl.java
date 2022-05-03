@@ -7,6 +7,13 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.msu.cmc.web_prac.video_rental.DAO.AbstractDAO;
 import ru.msu.cmc.web_prac.video_rental.DAO.ClientDAO;
 import ru.msu.cmc.web_prac.video_rental.tables.Client;
+import ru.msu.cmc.web_prac.video_rental.tables.Film;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -44,6 +51,37 @@ public class ClientDAOImpl extends AbstractDAOImpl<Client> implements ClientDAO 
             Query<Client> query = session.createQuery("FROM Client WHERE address LIKE :address", Client.class)
                     .setParameter("address", sqlAddress);
             return query.getResultList().size() == 0 ? null : query.getResultList();
+        }
+    }
+
+    @Override
+    public List<Client> findClient(String name, String phone, String address) {
+        try(Session session = this.getSessionFactory().openSession()) {
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaQuery<Client> query = cb.createQuery(Client.class);
+            Root<Client> root = query.from(Client.class);
+
+            // create path for dynamic filter query
+            List<Predicate> predicates = new ArrayList<>();
+            if(name != null) {
+                //create LIKE expr
+                String sqlName = "%" + name + "%";
+
+                predicates.add(cb.like(root.get("name"), sqlName));
+            }
+            if(phone != null) {
+                predicates.add(cb.equal(root.get("phone"), phone));
+            }
+            if(address != null) {
+                //create LIKE expr
+                String sqlAddress = "%" + address + "%";
+
+                predicates.add(cb.like(root.get("address"), sqlAddress));
+            }
+
+            //run query
+            query.select(root).where(cb.and(predicates.toArray(new Predicate[0])));
+            return session.createQuery(query).getResultList();
         }
     }
 }

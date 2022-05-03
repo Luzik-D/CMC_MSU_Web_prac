@@ -9,7 +9,7 @@ public interface ClientDAO {
     Client getById(Integer id);
     List<Client> getAll();
 
-    //filter methods
+    //filter methods (Legacy)
     List<Client> getClientByName(String name);
 
     List<Client> getClientByPhone(String phone);
@@ -20,4 +20,6 @@ public interface ClientDAO {
     void update(Client client);
     void delete(Client client);
     void save(Client client);
+
+    List<Client> findClient(String name, String phone, String address);
 }

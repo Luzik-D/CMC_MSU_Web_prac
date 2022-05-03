@@ -15,8 +15,7 @@ import ru.msu.cmc.web_prac.video_rental.tables.Film;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -40,6 +39,8 @@ public class FIlmDAOTest {
     }
 
     // tests for filter methods
+    // ! legacy (didn't know about dynamic query builder) !
+    // ! see filter tests below
     @Test
     public void getFilmWithFilter() throws Exception {
         // should be not empty
@@ -103,4 +104,20 @@ public class FIlmDAOTest {
 
     }
 
+    //test filter
+    @Test
+    public void testFilter() {
+        List<Film> listFilm = filmDAO.findFilm("Брат 2", null, null, null);
+        assertNotNull(listFilm);
+
+        List<Film> grFilms = filmDAO.findFilm(null, null, "Гай Ричи", null);
+        assertEquals(2, grFilms.size());
+
+        List<Film> year = filmDAO.findFilm(null, null, null, "2000");
+        assertEquals(2, year.size());
+
+        //same director, different years
+        List<Film> brother = filmDAO.findFilm(null, null, "Алексей Балабанов", "1997");
+        assertEquals("Брат", brother.get(0).getTitle());
+    }
 }

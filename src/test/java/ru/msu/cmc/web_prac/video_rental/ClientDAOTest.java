@@ -36,6 +36,8 @@ public class ClientDAOTest {
     }
 
     /* filter methods tests */
+    // ! Legacy (didn't know about dynamic queries) !
+    // see filter tests below
     @Test
     public void getClientWithFilter() throws Exception {
         /* should be not empty */
@@ -110,5 +112,24 @@ public class ClientDAOTest {
         afterDel = clientDAO.getAll();
         assertEquals(5, afterDel.size());
 
+    }
+
+    @Test
+    public void testFilter() {
+        // by firstname
+        List<Client> nameList = clientDAO.findClient("Дмитрий", null, null);
+        assertEquals(2, nameList.size());
+
+        //by full name
+        List<Client> fullNameList = clientDAO.findClient("Петров Иван Алексеевич", null, null);
+        assertEquals("89161448984", fullNameList.get(0).getPhone());
+
+        //by first name with params
+        nameList = clientDAO.findClient("Дмитрий", "77777777777", null);
+        assertEquals(1, nameList.size());
+
+        //by street
+        List<Client> addrList = clientDAO.findClient(null, null, "Владимирская");
+        assertEquals(2, addrList.size());
     }
 }

@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
+@ToString
 public class Film implements AbstractTable {
     @Id
     @Column(name = "film_id", nullable = false)
