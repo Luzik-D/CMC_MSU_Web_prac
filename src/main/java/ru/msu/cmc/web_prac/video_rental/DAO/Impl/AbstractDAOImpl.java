@@ -18,7 +18,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public abstract class AbstractDAOImpl<T extends AbstractTable<ID>, ID extends Integer> implements AbstractDAO<T, ID> {
+public abstract class AbstractDAOImpl<T extends AbstractTable> implements AbstractDAO<T> {
 
     //init logger
     private static final Logger logger = LoggerFactory.getLogger(AbstractDAOImpl.class);

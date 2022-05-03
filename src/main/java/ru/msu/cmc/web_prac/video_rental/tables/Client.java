@@ -13,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Client implements AbstractTable<Integer> {
+public class Client implements AbstractTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -28,7 +28,7 @@ public class Client implements AbstractTable<Integer> {
     @Column(name = "address", nullable = false)
     private String address;
 
-    public Integer getId() {
+    public int getId() {
         return this.id;
     }
 }

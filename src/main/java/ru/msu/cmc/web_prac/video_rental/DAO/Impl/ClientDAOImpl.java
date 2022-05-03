@@ -8,7 +8,7 @@ import ru.msu.cmc.web_prac.video_rental.tables.Client;
 
 @Repository
 @Transactional
-public class ClientDAOImpl extends AbstractDAOImpl<Client, Integer> implements ClientDAO {
+public class ClientDAOImpl extends AbstractDAOImpl<Client> implements ClientDAO {
     public ClientDAOImpl() {
         super(Client.class);
     }
