@@ -3,6 +3,7 @@ package ru.msu.cmc.web_prac.video_rental;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,40 @@ public class FIlmDAOTest {
 
         filmList = filmDAO.getFilmsByYear("3001");
         assertEquals(null, filmList);
+    }
+
+    //test update, delete and save
+    @Test
+    public void testUpdate() {
+        Film testFilm = filmDAO.getById(1);
+        testFilm.setTitle("Брат 3");
+        filmDAO.update(testFilm);
+        testFilm = filmDAO.getById(1);
+        assertEquals("Брат 3", testFilm.getTitle());
+
+        //return to correct data
+        testFilm.setTitle("Брат");
+        filmDAO.update(testFilm);
+        testFilm = filmDAO.getById(1);
+        assertEquals("Брат", testFilm.getTitle());
+    }
+
+    @Test
+    public void testSaveDelete() {
+        //create new film
+        Film newFilm = new Film( "web", "www", "me", "2022", "descr");
+        filmDAO.save(newFilm);
+        List<Film> testSave = filmDAO.getFilmsByTitle("web");
+        assertEquals(1, testSave.size());
+        assertEquals("web", testSave.get(0).getTitle());
+
+        //delete new film
+        List<Film> deleteFilm = filmDAO.getFilmsByTitle("web");
+        assertEquals(1, deleteFilm.size());
+        filmDAO.delete(deleteFilm.get(0));
+        List<Film> testDelete = filmDAO.getFilmsByTitle("web");
+        assertEquals(null,  testDelete);
+
     }
 
 }

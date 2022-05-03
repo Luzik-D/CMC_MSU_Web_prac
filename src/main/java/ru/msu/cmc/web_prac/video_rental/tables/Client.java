@@ -17,7 +17,7 @@ public class Client implements AbstractTable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "client_id", nullable = false)
-    private int id;
+    private Integer id;
 
     @Column(name = "name", nullable = false)
     private String name;

@@ -9,6 +9,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import ru.msu.cmc.web_prac.video_rental.tables.ClientHistoryRecord;
 import ru.msu.cmc.web_prac.video_rental.DAO.ClientHistoryRecordDAO;
 
+import java.util.Optional;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
@@ -26,6 +28,6 @@ public class ClientHistoryRecordDAOTest {
         ClientHistoryRecord record = clientHistoryRecordDAO.getById(1);
 
         assertNotEquals(null, record);
-        assertEquals(1, record.getClient().getId());
+        assertEquals((Integer) 1, record.getClient().getId());
     }
 }

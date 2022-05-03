@@ -2,6 +2,6 @@ package ru.msu.cmc.web_prac.video_rental.tables;
 
 /* Create an abstract table with getter and setter for id */
 public interface AbstractTable {
-    int getId();
-    void setId(int id);
+    Integer getId();
+    void setId(Integer id);
 }

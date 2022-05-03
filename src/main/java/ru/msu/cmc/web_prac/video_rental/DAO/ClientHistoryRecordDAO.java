@@ -5,6 +5,6 @@ import ru.msu.cmc.web_prac.video_rental.tables.ClientHistoryRecord;
 import java.util.List;
 
 public interface ClientHistoryRecordDAO {
-    public ClientHistoryRecord getById(int id);
+    public ClientHistoryRecord getById(Integer id);
     public List<ClientHistoryRecord> getAll();
 }

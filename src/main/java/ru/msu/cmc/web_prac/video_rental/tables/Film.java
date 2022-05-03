@@ -1,9 +1,6 @@
 package ru.msu.cmc.web_prac.video_rental.tables;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -14,12 +11,12 @@ import javax.persistence.*;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class Film implements AbstractTable {
     @Id
     @Column(name = "film_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "title", nullable = false)
     private String title;
@@ -32,4 +29,16 @@ public class Film implements AbstractTable {
 
     @Column(name = "year_of_release", nullable = false)
     private String yearOfRelease;
+
+    @Column(name = "description", nullable = false)
+    private String description;
+
+    //constructor to insert (without id)
+    public Film(String title, String company, String director, String yearOfRelease, String description) {
+        this.title = title;
+        this.company = company;
+        this.director = director;
+        this.yearOfRelease = yearOfRelease;
+        this.description = description;
+    }
 }

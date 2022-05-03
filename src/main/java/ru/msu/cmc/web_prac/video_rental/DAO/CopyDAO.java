@@ -5,7 +5,7 @@ import ru.msu.cmc.web_prac.video_rental.tables.Copy;
 import java.util.List;
 
 public interface CopyDAO {
-    Copy getById(int id);
+    Copy getById(Integer id);
     public List<Copy> getAll();
     void update(Copy copy);
     void delete(Copy copy);

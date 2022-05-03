@@ -6,7 +6,7 @@ import java.util.List;
 
 /* all DAO classes have same methods */
 public interface AbstractDAO<T extends AbstractTable> {
-    T getById(int id);
+    T getById(Integer id);
     List<T> getAll();
 
     void update(T entity);

@@ -43,7 +43,7 @@ public abstract class AbstractDAOImpl<T extends AbstractTable> implements Abstra
     }
 
     @Override
-    public T getById(int id) {
+    public T getById(Integer id) {
         try(Session session = sessionFactory.openSession()) {
             T entity = session.get(entityClass, id);
             logger.info("Get by id" + entityClass + id);
@@ -88,12 +88,8 @@ public abstract class AbstractDAOImpl<T extends AbstractTable> implements Abstra
     @Override
     public void save(T entity) {
         try(Session session = sessionFactory.openSession()) {
-            // check if already exists
-            if(entity.getId() != 0) {
-                entity.setId(0);
-            }
             session.beginTransaction();
-            session.saveOrUpdate(entity);
+            session.save(entity);
             session.getTransaction().commit();
         }
     }
