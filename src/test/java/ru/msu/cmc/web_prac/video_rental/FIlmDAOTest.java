@@ -38,14 +38,33 @@ public class FIlmDAOTest {
         assertEquals(4, filmList.size());
     }
 
+    // tests for filter methods
     @Test
-    public void getFilmByTitle() throws Exception {
+    public void getFilmWithFilter() throws Exception {
         // should be not empty
         List<Film> filmList = filmDAO.getFilmsByTitle("Брат");
         assertNotEquals(null, filmList);
 
+        filmList = filmDAO.getFilmsByCompany("Columbia Pictures");
+        assertNotEquals(null, filmList);
+
+        filmList = filmDAO.getFilmsByDirector("Гай Ричи");
+        assertNotEquals(null, filmList);
+
+        filmList = filmDAO.getFilmsByYear("2000");
+        assertNotEquals(null, filmList);
+
         //should be empty
         filmList = filmDAO.getFilmsByTitle("test");
+        assertEquals(null, filmList);
+
+        filmList = filmDAO.getFilmsByCompany("work");
+        assertEquals(null, filmList);
+
+        filmList = filmDAO.getFilmsByDirector("Dmitry Luzik");
+        assertEquals(null, filmList);
+
+        filmList = filmDAO.getFilmsByYear("3001");
         assertEquals(null, filmList);
     }
 

@@ -28,16 +28,28 @@ public class FilmDAOImpl extends AbstractDAOImpl<Film> implements FilmDAO {
 
     @Override
     public List<Film> getFilmsByCompany(String company) {
-        return null;
+        try(Session session = this.getSessionFactory().openSession()) {
+            Query<Film> query = session.createQuery("FROM Film WHERE company = :name", Film.class)
+                    .setParameter("name", company);
+            return query.getResultList().size() == 0 ? null : query.getResultList();
+        }
     }
 
     @Override
     public List<Film> getFilmsByDirector(String director) {
-        return null;
+        try(Session session = this.getSessionFactory().openSession()) {
+            Query<Film> query = session.createQuery("FROM Film WHERE director = :name", Film.class)
+                    .setParameter("name", director);
+            return query.getResultList().size() == 0 ? null : query.getResultList();
+        }
     }
 
     @Override
     public List<Film> getFilmsByYear(String year) {
-        return null;
+        try(Session session = this.getSessionFactory().openSession()) {
+            Query<Film> query = session.createQuery("FROM Film WHERE yearOfRelease = :name", Film.class)
+                    .setParameter("name", year);
+            return query.getResultList().size() == 0 ? null : query.getResultList();
+        }
     }
 }
