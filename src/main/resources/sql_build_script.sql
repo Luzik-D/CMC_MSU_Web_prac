@@ -27,9 +27,9 @@ CREATE TABLE ClientHistoryRecord (
                                      history_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                                      client_id INT,
                                      copy_id INT,
-                                     date_of_transfer TIMESTAMP NOT NULL,
-                                     date_of_receipt TIMESTAMP NOT NULL,
-                                     actual_date_of_receipt TIMESTAMP NOT NULL,
+                                     date_of_transfer DATE NOT NULL,
+                                     date_of_receipt DATE NOT NULL,
+                                     actual_date_of_receipt DATE NOT NULL,
                                      transfer_amount INT NOT NULL,
 
                                      FOREIGN KEY (client_id) REFERENCES Client(client_id),
@@ -73,17 +73,17 @@ INSERT INTO Copy(film_id, type, status, price) VALUES(4, 'Диск', 'Свобо
 
 /* INTO ClientHistoryTable */
 INSERT INTO ClientHistoryRecord(client_id, copy_id, date_of_transfer, date_of_receipt, actual_date_of_receipt, transfer_amount)
-    VALUES(1, 1, '01.02.2022', '10.02.2022', '09.02.2022', 550);
+    VALUES(1, 1, '2022.02.01', '2022.02.10', '2022.02.09', 550);
 INSERT INTO ClientHistoryRecord(client_id, copy_id, date_of_transfer, date_of_receipt, actual_date_of_receipt, transfer_amount)
-    VALUES(1, 5, '15.02.2022', '22.02.2022', '22.02.2022', 650);
+    VALUES(1, 5, '2022.02.15', '2022.02.22', '2022.02.22', 650);
 INSERT INTO ClientHistoryRecord(client_id, copy_id, date_of_transfer, date_of_receipt, actual_date_of_receipt, transfer_amount)
-    VALUES(2, 10, '10.02.2022', '20.02.2022', '17.02.2022', 500);
+    VALUES(2, 10, '2022.02.10', '2022.02.20', '2022.02.17', 500);
 INSERT INTO ClientHistoryRecord(client_id, copy_id, date_of_transfer, date_of_receipt, actual_date_of_receipt, transfer_amount)
-    VALUES(3, 11, '10.02.2022', '20.02.2022', '20.02.2022', 500);
+    VALUES(3, 11, '2022.02.10', '2022.02.20', '2022.02.20', 500);
 INSERT INTO ClientHistoryRecord(client_id, copy_id, date_of_transfer, date_of_receipt, actual_date_of_receipt, transfer_amount)
-    VALUES(3, 15, '24.02.2022', '01.03.2022', '01.03.2022', 700);
+    VALUES(3, 15, '2022.02.24', '2022.03.01', '2022.03.01', 700);
 INSERT INTO ClientHistoryRecord(client_id, copy_id, date_of_transfer, date_of_receipt, actual_date_of_receipt, transfer_amount)
-    VALUES(4, 2, '01.03.2022', '07.03.2022', '07.03.2022', 450);
+    VALUES(4, 2, '2022.03.01', '2022.03.03', '2022.03.07', 450);
 
 /* Test by SELECT */
 

@@ -125,5 +125,9 @@ public class FIlmDAOTest {
         //same director, different years
         List<Film> brother = filmDAO.findFilm(null, null, "Алексей Балабанов", "1997");
         assertEquals("Брат", brother.get(0).getTitle());
+
+        //company
+        List<Film> company = filmDAO.findFilm(null, "Columbia Pictures", null, null);
+        assertEquals(1, company.size());
     }
 }

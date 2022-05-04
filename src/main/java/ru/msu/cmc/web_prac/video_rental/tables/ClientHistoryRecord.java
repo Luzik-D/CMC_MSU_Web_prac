@@ -38,4 +38,13 @@ public class ClientHistoryRecord implements AbstractTable {
 
     @Column(name = "transfer_amount", nullable = false)
     private int transferAmount;
+
+    public ClientHistoryRecord(Client client, Copy copy, String dateOT, String dateOR, String aDateOR, int transferAmount) {
+        this.client = client;
+        this.copy = copy;
+        this.dateOfTransfer = dateOT;
+        this.dateOfReceipt = dateOR;
+        this.actualDateOfReceipt = aDateOR;
+        this.transferAmount = transferAmount;
+    }
 }
