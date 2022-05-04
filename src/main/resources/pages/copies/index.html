@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Копии</title>
+</head>
+<body>
+all copies
+<div th:each="copy : ${copies}">
+    <a th:href="@{/copies/{id}(id=${copy.getId()})}"
+       th:text="${copy.getId()} + ' ' + ${copy.getFilm().getTitle()}">
+    </a>
+</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Копия</title>
+</head>
+<body>
+copy
+<p th:text="'Id: ' + ${copy.getId()}"></p>
+<!-- change filmId to filmName -->
+<p th:text="'Фильм: ' + ${copy.getFilm().getTitle()}"></p>
+<p th:text="'Тип носителя: ' + ${copy.getType()}"></p>
+<p th:text="'Статус: ' + ${copy.getStatus()}"></p>
+<p th:text="'Цена: ' + ${copy.getPrice()}"></p>
+</body>
+</html>
