@@ -113,8 +113,9 @@ public class FIlmDAOTest {
     //test filter
     @Test
     public void testFilter() {
-        List<Film> listFilm = filmDAO.findFilm("Брат 2", null, null, null);
+        List<Film> listFilm = filmDAO.findFilm("Брат", null, null, null);
         assertNotNull(listFilm);
+        assertEquals(2, listFilm.size());
 
         List<Film> grFilms = filmDAO.findFilm(null, null, "Гай Ричи", null);
         assertEquals(2, grFilms.size());

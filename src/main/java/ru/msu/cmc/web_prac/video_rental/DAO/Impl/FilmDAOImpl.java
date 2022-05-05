@@ -71,7 +71,7 @@ public class FilmDAOImpl extends AbstractDAOImpl<Film> implements FilmDAO {
                 //create LIKE expr
                 String sqlTitle = "%" + title + "%";
 
-                predicates.add(cb.like(root.get("title"), title));
+                predicates.add(cb.like(root.get("title"), sqlTitle));
             }
             if(company != null) {
                 predicates.add(cb.equal(root.get("company"), company));

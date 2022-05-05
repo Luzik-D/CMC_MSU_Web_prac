@@ -28,7 +28,11 @@
     </div>
 </nav>
 <!-- Search form -->
-<!-- https://spring-projects.ru/guides/handling-form-submission -->
+    <h1>Form</h1>
+    <form action="#" th:action="@{/}" th:object="${filter}" method="post">
+        <p>Title: <input type="text" th:field="*{title}"/></p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
 <!-- get all films -->
 <div class="list-group">
     <div th:each="film : ${films}">

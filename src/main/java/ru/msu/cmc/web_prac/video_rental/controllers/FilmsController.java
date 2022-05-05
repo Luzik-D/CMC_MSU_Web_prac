@@ -3,14 +3,13 @@ package ru.msu.cmc.web_prac.video_rental.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.msu.cmc.web_prac.video_rental.DAO.CopyDAO;
 import ru.msu.cmc.web_prac.video_rental.DAO.FilmDAO;
 import ru.msu.cmc.web_prac.video_rental.DAO.Impl.CopyDAOImpl;
 import ru.msu.cmc.web_prac.video_rental.DAO.Impl.FilmDAOImpl;
 import ru.msu.cmc.web_prac.video_rental.tables.Copy;
+import ru.msu.cmc.web_prac.video_rental.tables.Film;
 
 import java.util.List;
 
@@ -27,6 +26,7 @@ public class FilmsController {
     @GetMapping()
     public String index(Model model) {
         model.addAttribute("films", filmDAO.getAll());
+        model.addAttribute("filter", new Film());
         return "films/index";
     }
 
@@ -64,5 +64,12 @@ public class FilmsController {
         model.addAttribute("cassettesAmount", cassettesAmount);
         model.addAttribute("cassettePrice", cassettePrice);
         return "films/show";
+    }
+
+    @PostMapping()
+    public String filter(@ModelAttribute Film film, Model model) {
+        model.addAttribute("filteredFilms", filmDAO.findFilm(film.getTitle(), film.getCompany(),
+                                                                         film.getDirector(), film.getYearOfRelease()));
+        return "films/filtered";
     }
 }
