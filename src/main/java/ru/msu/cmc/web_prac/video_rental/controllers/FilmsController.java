@@ -15,7 +15,7 @@ import ru.msu.cmc.web_prac.video_rental.tables.Copy;
 import java.util.List;
 
 @Controller
-@RequestMapping("/films")
+@RequestMapping()
 public class FilmsController {
 
     @Autowired
@@ -30,7 +30,7 @@ public class FilmsController {
         return "films/index";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("films/{id}")
     public String show(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("film", filmDAO.getById(id));
 
