@@ -27,10 +27,14 @@
         </div>
     </div>
 </nav>
-Films all:
+<!-- Search form -->
+<!-- https://spring-projects.ru/guides/handling-form-submission -->
 <!-- get all films -->
-<div th:each="film : ${films}">
-    <a th:href="@{/films/{id}(id=${film.getId()})}" th:text="${film.getTitle()}">film</a>
+<div class="list-group">
+    <div th:each="film : ${films}">
+        <!--<a th:href="@{/films/{id}(id=${film.getId()})}" th:text="${film.getTitle()}">film</a>-->
+        <a th:href="@{/films/{id}(id=${film.getId()})}" class="list-group-item list-group-item-action" th:text="${film.getTitle()}">film</a>
+    </div>
 </div>
 </body>
 </html>

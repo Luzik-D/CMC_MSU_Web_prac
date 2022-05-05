@@ -28,10 +28,13 @@
     </div>
 </nav>
 all copies
-<div th:each="copy : ${copies}">
-    <a th:href="@{/copies/{id}(id=${copy.getId()})}"
-       th:text="${copy.getId()} + ' ' + ${copy.getFilm().getTitle()}">
-    </a>
+<div class="list-group">
+    <div th:each="copy : ${copies}">
+        <a th:href="@{/copies/{id}(id=${copy.getId()})}"
+           class="list-group-item list-group-item-action"
+           th:text="${copy.getId()} + ' ' + ${copy.getFilm().getTitle()}">
+        </a>
+    </div>
 </div>
 </body>
 </html>

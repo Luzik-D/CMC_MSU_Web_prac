@@ -28,8 +28,10 @@
     </div>
 </nav>
 <!-- get all clients -->
-<div th:each="client : ${clients}">
-    <a th:href="@{/clients/{id}(id=${client.getId()})}" th:text="${client.getName()}">client</a>
+<div class="list-group">
+    <div th:each="client : ${clients}">
+        <a th:href="@{/clients/{id}(id=${client.getId()})}" class="list-group-item list-group-item-action" th:text="${client.getName()}">client</a>
+    </div>
 </div>
 </body>
 </html>
