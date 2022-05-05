@@ -9,4 +9,15 @@
 <p th:text="'Телефон: ' + ${client.getPhone()}"></p>
 <p th:text="'Адрес: ' + ${client.getAddress()}"></p>
 </body>
+
+here we have all films
+<div th:each="record : ${records}">
+    <p th:text="${record.getCopy().getId()} + '; ' +
+                ${record.getCopy().getFilm().getTitle()} + '; ' +
+                'Дата Оформления: ' + ${record.getDateOfTransfer()} + '; ' +
+                'Дата возврата (формальная): ' + ${record.getDateOfReceipt()} + '; ' +
+                'Дата возврата (реальная): ' + ${record.getActualDateOfReceipt()} + '; ' +
+                'Стоимость: ' + ${record.getTransferAmount()}">
+    </p>
+</div>
 </html>
