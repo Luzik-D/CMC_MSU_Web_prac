@@ -63,16 +63,16 @@ public class ClientDAOImpl extends AbstractDAOImpl<Client> implements ClientDAO 
 
             // create path for dynamic filter query
             List<Predicate> predicates = new ArrayList<>();
-            if(name != null) {
+            if(name != null && name != "") {
                 //create LIKE expr
                 String sqlName = "%" + name + "%";
 
                 predicates.add(cb.like(root.get("name"), sqlName));
             }
-            if(phone != null) {
+            if(phone != null && phone != "") {
                 predicates.add(cb.equal(root.get("phone"), phone));
             }
-            if(address != null) {
+            if(address != null && address != "") {
                 //create LIKE expr
                 String sqlAddress = "%" + address + "%";
 

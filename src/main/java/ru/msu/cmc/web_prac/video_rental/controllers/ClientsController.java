@@ -3,15 +3,14 @@ package ru.msu.cmc.web_prac.video_rental.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.msu.cmc.web_prac.video_rental.DAO.ClientDAO;
 import ru.msu.cmc.web_prac.video_rental.DAO.ClientHistoryRecordDAO;
 import ru.msu.cmc.web_prac.video_rental.DAO.CopyDAO;
 import ru.msu.cmc.web_prac.video_rental.DAO.Impl.ClientDAOImpl;
 import ru.msu.cmc.web_prac.video_rental.DAO.Impl.ClientHistoryRecordImpl;
 import ru.msu.cmc.web_prac.video_rental.DAO.Impl.CopyDAOImpl;
+import ru.msu.cmc.web_prac.video_rental.tables.Client;
 import ru.msu.cmc.web_prac.video_rental.tables.ClientHistoryRecord;
 import ru.msu.cmc.web_prac.video_rental.tables.Copy;
 
@@ -30,6 +29,7 @@ public class ClientsController {
     @GetMapping()
     public String index(Model model) {
         model.addAttribute("clients", clientDAO.getAll());
+        model.addAttribute("filter", new Client());
         return "clients/index";
     }
 
@@ -48,5 +48,12 @@ public class ClientsController {
         model.addAttribute("records", records);
 
         return "clients/show";
+    }
+
+    @PostMapping()
+    public String filter(@ModelAttribute Client client, Model model) {
+        model.addAttribute("filteredClients", clientDAO.findClient(client.getName(), client.getPhone(), client.getAddress()));
+
+        return "clients/filtered";
     }
 }

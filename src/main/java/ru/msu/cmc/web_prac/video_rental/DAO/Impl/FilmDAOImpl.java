@@ -73,13 +73,13 @@ public class FilmDAOImpl extends AbstractDAOImpl<Film> implements FilmDAO {
 
                 predicates.add(cb.like(root.get("title"), sqlTitle));
             }
-            if(company != null) {
+            if(company != null && company != "") {
                 predicates.add(cb.equal(root.get("company"), company));
             }
-            if(director != null) {
+            if(director != null && director != "") {
                 predicates.add(cb.equal(root.get("director"), director));
             }
-            if(year != null) {
+            if(year != null && year != "") {
                 predicates.add(cb.equal(root.get("yearOfRelease"), year));
             }
 

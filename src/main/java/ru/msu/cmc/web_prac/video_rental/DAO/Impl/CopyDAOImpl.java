@@ -33,10 +33,10 @@ public class CopyDAOImpl extends AbstractDAOImpl<Copy> implements CopyDAO {
             if (filmId != null) {
                 predicates.add(cb.equal(root.get("film"), filmId));
             }
-            if (type != null) {
+            if (type != null && type != "") {
                 predicates.add(cb.equal(root.get("type"), type));
             }
-            if(status != null) {
+            if(status != null && type != "") {
                 predicates.add(cb.equal(root.get("status"), status));
             }
             if (price != null) {

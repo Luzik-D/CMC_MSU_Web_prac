@@ -28,10 +28,13 @@
     </div>
 </nav>
 <!-- Search form -->
-    <h1>Form</h1>
+    <h1>Поиск фильма</h1>
     <form action="#" th:action="@{/}" th:object="${filter}" method="post">
-        <p>Title: <input type="text" th:field="*{title}"/></p>
-        <p><input type="submit" value="Submit"/></p>
+        <p>Название: <input type="text" th:field="*{title}"/></p>
+        <p>Компания: <input type="text" th:field="*{company}"/></p>
+        <p>Режиссер: <input type="text" th:field="*{director}"/></p>
+        <p>Год выпуска: <input type="text" th:field="*{yearOfRelease}"/></p>
+        <p><input type="submit" value="Найти"/></p>
     </form>
 <!-- get all films -->
 <div class="list-group">
