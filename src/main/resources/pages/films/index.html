@@ -43,5 +43,9 @@
         <a th:href="@{/films/{id}(id=${film.getId()})}" class="list-group-item list-group-item-action" th:text="${film.getTitle()}">film</a>
     </div>
 </div>
+<!-- button for new film -->
+<form action="films/show">
+    <button type="button" class="btn btn-outline-success">Создать</button>
+</form>
 </body>
 </html>

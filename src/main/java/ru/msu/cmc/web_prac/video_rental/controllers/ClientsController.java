@@ -50,6 +50,17 @@ public class ClientsController {
         return "clients/show";
     }
 
+    @GetMapping("/new")
+    public String clientForm(Model model) {
+        model.addAttribute("newClient", new Client());
+        return "clients/new";
+    }
+
+    @PostMapping("/new")
+    public String newClient(@ModelAttribute Client client, Model model) {
+
+        return "clients/new";
+    }
     @PostMapping()
     public String filter(@ModelAttribute Client client, Model model) {
         model.addAttribute("filteredClients", clientDAO.findClient(client.getName(), client.getPhone(), client.getAddress()));
