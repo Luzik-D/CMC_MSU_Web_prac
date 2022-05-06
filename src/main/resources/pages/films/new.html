@@ -6,19 +6,19 @@
           crossorigin="anonymous">
 
     <meta charset="UTF-8">
-    <title>Клиенты</title>
+    <title>Фильм</title>
 </head>
 <body>
 <!-- Navigation Panel -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Клиенты</a>
+        <a class="navbar-brand" href="/">Фильмы</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="/">Фильмы</a>
+                <a class="nav-link active" aria-current="page" href="/clients">Клиенты</a>
                 <!-- make info pages -->
                 <a class="nav-link" href="#">История транзакций</a>
                 <a class="nav-link" href="#">Информация</a>
@@ -27,23 +27,15 @@
         </div>
     </div>
 </nav>
-<!-- Search form -->
-<h1>Поиск клиента</h1>
-<form action="#" th:action="@{/clients/filtered}" th:object="${filter}" method="post">
-    <p>ФИО: <input type="text" th:field="*{name}"/></p>
-    <p>Телефон: <input type="text" th:field="*{phone}"/></p>
-    <p>Адрес: <input type="text" th:field="*{address}"/></p>
-    <button type="submit" class="btn btn-outline-secondary">Найти</button>
-</form>
-<!-- get all clients -->
-<div class="list-group">
-    <div th:each="client : ${clients}">
-        <a th:href="@{/clients/{id}(id=${client.getId()})}" class="list-group-item list-group-item-action" th:text="${client.getName()}">client</a>
-    </div>
-</div>
-<!-- button for create client -->
-<form method="get" action="clients/new">
-    <button type="submit" class="btn btn-outline-success">Создать</button>
+<!-- Create form -->
+<h1>Поиск фильма</h1>
+<form action="#" th:action="@{/new}" th:object="${newFilm}" method="post">
+    <p>Название: <input type="text" th:field="*{title}"/></p>
+    <p>Компания: <input type="text" th:field="*{company}"/></p>
+    <p>Режиссер: <input type="text" th:field="*{director}"/></p>
+    <p>Год выпуска: <input type="text" th:field="*{yearOfRelease}"/></p>
+    <p>Описание: <input type="text" th:field="*{description}"/></p>
+    <p><input type="submit" value="Найти"/></p>
 </form>
 </body>
 </html>

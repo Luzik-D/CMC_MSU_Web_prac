@@ -11,6 +11,7 @@ import ru.msu.cmc.web_prac.video_rental.DAO.Impl.FilmDAOImpl;
 import ru.msu.cmc.web_prac.video_rental.tables.Copy;
 import ru.msu.cmc.web_prac.video_rental.tables.Film;
 
+import javax.xml.ws.Service;
 import java.util.List;
 
 @Controller
@@ -28,6 +29,13 @@ public class FilmsController {
         model.addAttribute("films", filmDAO.getAll());
         model.addAttribute("filter", new Film());
         return "films/index";
+    }
+
+    @GetMapping("/filtered")
+    public String showFiltered(Model model) {
+        model.addAttribute("filter", new Film());
+
+        return "films/filtered";
     }
 
     @GetMapping("films/{id}")
@@ -66,10 +74,23 @@ public class FilmsController {
         return "films/show";
     }
 
-    @PostMapping()
+    @GetMapping("/new")
+    public String newFilm(Model model) {
+        model.addAttribute("newFilm", new Film());
+
+        return "films/new";
+    }
+    @PostMapping("/filtered")
     public String filter(@ModelAttribute Film film, Model model) {
         model.addAttribute("filteredFilms", filmDAO.findFilm(film.getTitle(), film.getCompany(),
                                                                          film.getDirector(), film.getYearOfRelease()));
         return "films/filtered";
+    }
+
+    @PostMapping("/new")
+    public String createFilm(@ModelAttribute("newFilm") Film film) {
+        filmDAO.save(film);
+
+        return "redirect:/";
     }
 }

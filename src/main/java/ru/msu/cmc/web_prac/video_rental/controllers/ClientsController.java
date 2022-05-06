@@ -30,9 +30,15 @@ public class ClientsController {
     public String index(Model model) {
         model.addAttribute("clients", clientDAO.getAll());
         model.addAttribute("filter", new Client());
+        System.out.printf("hello world\n");
         return "clients/index";
     }
 
+    @GetMapping("/filtered")
+    public String showFiltered(Model model) {
+        model.addAttribute("filter", new Client());
+        return "clients/filtered";
+    }
     @GetMapping("/{id}")
     public String show(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("client", clientDAO.getById(id));
@@ -56,15 +62,22 @@ public class ClientsController {
         return "clients/new";
     }
 
-    @PostMapping("/new")
-    public String newClient(@ModelAttribute Client client, Model model) {
-
-        return "clients/new";
-    }
-    @PostMapping()
+    @PostMapping("/filtered")
     public String filter(@ModelAttribute Client client, Model model) {
+        System.out.printf("hello filter");
         model.addAttribute("filteredClients", clientDAO.findClient(client.getName(), client.getPhone(), client.getAddress()));
 
         return "clients/filtered";
+    }
+
+    @PostMapping("/new")
+    public String createClient(@ModelAttribute("newClient") Client client) {
+
+        System.out.printf("hello new client");
+        System.out.println("name" + client.getName());
+        clientDAO.save(client);
+        System.out.println("name" + client.getName());
+
+        return "redirect:/clients";
     }
 }
