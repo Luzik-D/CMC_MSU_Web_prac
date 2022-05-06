@@ -42,7 +42,6 @@ public class FilmsController {
     @GetMapping("films/{id}")
     public String show(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("film", filmDAO.getById(id));
-        System.out.printf("hello there films/id");
 
         // get info about disks
         List<Copy> disks = copyDAO.findCopy(id, "Диск", null, null);
