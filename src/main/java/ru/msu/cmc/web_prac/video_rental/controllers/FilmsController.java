@@ -46,10 +46,10 @@ public class FilmsController {
         List<Copy> disks = copyDAO.findCopy(id, "Диск", null, null);
 
         //error if null
-        if(disks == null) {
+        if(disks.size() == 0) {
             //error
+            return "films/show";
         }
-
         int disksAmount = disks.size();
         int diskPrice = disks.get(0).getPrice();
 
@@ -61,8 +61,9 @@ public class FilmsController {
         List<Copy> cassettes = copyDAO.findCopy(id, "Кассета", null, null);
 
         //error if null
-        if(cassettes == null) {
+        if(cassettes.size() == 0) {
             //error
+            return "films/show";
         }
 
         int cassettesAmount = cassettes.size();
@@ -74,22 +75,29 @@ public class FilmsController {
         return "films/show";
     }
 
-    @GetMapping("/new")
+    @GetMapping("films/new")
     public String newFilm(Model model) {
         model.addAttribute("newFilm", new Film());
 
         return "films/new";
     }
-    @PostMapping("/filtered")
+    @PostMapping("films/filtered")
     public String filter(@ModelAttribute Film film, Model model) {
         model.addAttribute("filteredFilms", filmDAO.findFilm(film.getTitle(), film.getCompany(),
                                                                          film.getDirector(), film.getYearOfRelease()));
         return "films/filtered";
     }
 
-    @PostMapping("/new")
+    @PostMapping("films/new")
     public String createFilm(@ModelAttribute("newFilm") Film film) {
         filmDAO.save(film);
+
+        return "redirect:/";
+    }
+
+    @DeleteMapping("films/{id}")
+    public String deleteFilm(@PathVariable("id") Integer id) {
+        filmDAO.delete(filmDAO.getById(id));
 
         return "redirect:/";
     }

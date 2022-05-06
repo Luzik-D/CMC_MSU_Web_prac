@@ -29,13 +29,13 @@
 </nav>
 <!-- Create form -->
 <h1>Поиск фильма</h1>
-<form action="#" th:action="@{/new}" th:object="${newFilm}" method="post">
+<form action="#" th:action="@{/films/new}" th:object="${newFilm}" method="post">
     <p>Название: <input type="text" th:field="*{title}"/></p>
     <p>Компания: <input type="text" th:field="*{company}"/></p>
     <p>Режиссер: <input type="text" th:field="*{director}"/></p>
     <p>Год выпуска: <input type="text" th:field="*{yearOfRelease}"/></p>
     <p>Описание: <input type="text" th:field="*{description}"/></p>
-    <p><input type="submit" value="Найти"/></p>
+    <p><input type="submit" value="Создать"/></p>
 </form>
 </body>
 </html>

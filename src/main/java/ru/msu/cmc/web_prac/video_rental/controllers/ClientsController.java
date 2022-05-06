@@ -80,4 +80,11 @@ public class ClientsController {
 
         return "redirect:/clients";
     }
+
+    @DeleteMapping("/{id}")
+    public String deleteClient(@PathVariable("id") Integer id) {
+        clientDAO.delete(clientDAO.getById(id));
+
+        return "redirect:/clients";
+    }
 }

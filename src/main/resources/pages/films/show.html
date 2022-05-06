@@ -42,6 +42,9 @@ here we have copies
 <p th:text="'Количество: ' + ${cassettesAmount}"></p>
 <p th:text="'Стоимость: ' + ${cassettePrice}"></p>
 </div>
-
+<!-- button for delete -->
+<form th:action="@{/films/{id}(id=${film.getId()})}" th:method="DELETE">
+    <input type="submit" value="Удалить"/>
+</form>
 </body>
 </html>

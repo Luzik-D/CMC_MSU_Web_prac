@@ -49,6 +49,8 @@ public class CopyDAOTest {
         //find all disks
         List<Copy> copyList = copyDAO.findCopy(null, "Диск", null, null);
         assertEquals(10, copyList.size());
+        List<Copy> badList = copyDAO.findCopy(null, "sdfsd", null, null);
+        assertEquals(badList.size(), 0);
 
         //find all cassettes with film Brother
         List<Copy> brotherList = copyDAO.findCopy(1, "Диск", null, null);

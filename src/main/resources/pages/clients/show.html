@@ -27,11 +27,10 @@
         </div>
     </div>
 </nav>
-<body>
+
 <p th:text="'Имя: ' + ${client.getName()}"></p>
 <p th:text="'Телефон: ' + ${client.getPhone()}"></p>
 <p th:text="'Адрес: ' + ${client.getAddress()}"></p>
-</body>
 
 here we have all films
 <div th:each="record : ${records}">
@@ -43,4 +42,9 @@ here we have all films
                 'Стоимость: ' + ${record.getTransferAmount()}">
     </p>
 </div>
+<!-- button for delete -->
+<form th:action="@{/clients/{id}(id=${client.getId()})}" th:method="DELETE">
+    <input type="submit" value="Удалить"/>
+</form>
+</body>
 </html>
