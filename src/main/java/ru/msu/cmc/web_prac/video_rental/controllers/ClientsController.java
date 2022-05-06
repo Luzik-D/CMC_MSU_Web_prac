@@ -62,6 +62,12 @@ public class ClientsController {
         return "clients/new";
     }
 
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("client", clientDAO.getById(id));
+
+        return "clients/edit";
+    }
     @PostMapping("/filtered")
     public String filter(@ModelAttribute Client client, Model model) {
         System.out.printf("hello filter");
@@ -85,6 +91,12 @@ public class ClientsController {
     public String deleteClient(@PathVariable("id") Integer id) {
         clientDAO.delete(clientDAO.getById(id));
 
+        return "redirect:/clients";
+    }
+
+    @PatchMapping("/{id}")
+    public String updateClient(@PathVariable("id") Integer id, @ModelAttribute("client") Client client) {
+        clientDAO.update(client);
         return "redirect:/clients";
     }
 }

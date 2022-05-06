@@ -81,6 +81,13 @@ public class FilmsController {
 
         return "films/new";
     }
+
+    @GetMapping("films/{id}/edit")
+    public String editFilm(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("film", filmDAO.getById(id));
+
+        return "films/edit";
+    }
     @PostMapping("films/filtered")
     public String filter(@ModelAttribute Film film, Model model) {
         model.addAttribute("filteredFilms", filmDAO.findFilm(film.getTitle(), film.getCompany(),
@@ -98,6 +105,13 @@ public class FilmsController {
     @DeleteMapping("films/{id}")
     public String deleteFilm(@PathVariable("id") Integer id) {
         filmDAO.delete(filmDAO.getById(id));
+
+        return "redirect:/";
+    }
+
+    @PatchMapping("films/{id}")
+    public String updateFilm(@ModelAttribute("film") Film film) {
+        filmDAO.update(film);
 
         return "redirect:/";
     }

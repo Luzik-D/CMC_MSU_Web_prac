@@ -12,13 +12,13 @@
 <!-- Navigation Panel -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
+        <a class="navbar-brand" href="/">Фильмы</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link" href="/">Фильмы</a>
-                <a class="nav-link" href="/clients">Клиенты</a>
+                <a class="nav-link active" aria-current="page" href="/clients">Клиенты</a>
                 <!-- make info pages -->
                 <a class="nav-link" href="#">История транзакций</a>
                 <a class="nav-link" href="#">Информация</a>
@@ -27,27 +27,15 @@
         </div>
     </div>
 </nav>
-<p th:text="'Название: ' + ${film.getTitle()}"></p>
-<p th:text="'Компания: ' + ${film.getCompany()}"></p>
-<p th:text="'Режиссер: ' + ${film.getDirector()}"></p>
-<p th:text="'Год выпуска: ' + ${film.getYearOfRelease()}"></p>
-<p th:text="'Описание: ' + ${film.getDescription()}"></p>
-
-here we have copies
-<p th:text="'Диск'"></p>
-<p th:text="'Количество: ' + ${disksAmount}"></p>
-<p th:text="'Стоимость: ' + ${diskPrice}"></p>
-
-<p th:text="'Кассета'"></p>
-<p th:text="'Количество: ' + ${cassettesAmount}"></p>
-<p th:text="'Стоимость: ' + ${cassettePrice}"></p>
-</div>
-<!-- button for delete -->
-<form th:action="@{/films/{id}(id=${film.getId()})}" th:method="DELETE">
-    <input type="submit" value="Удалить"/>
+<!-- Create form -->
+<h1>Поиск фильма</h1>
+<form th:action="@{/films/{id}(id=${film.getId()})}" th:object="${film}" th:method="PATCH">
+    <p>Название: <input type="text" th:field="*{title}"/></p>
+    <p>Компания: <input type="text" th:field="*{company}"/></p>
+    <p>Режиссер: <input type="text" th:field="*{director}"/></p>
+    <p>Год выпуска: <input type="text" th:field="*{yearOfRelease}"/></p>
+    <p>Описание: <input type="text" th:field="*{description}"/></p>
+    <p><input type="submit" value="Подтвердить"/></p>
 </form>
-<!-- button for update -->
-<form th:action="@{/films/{id}/edit(id=${film.getId()})}" method="get">
-    <button type="submit" class="btn btn-outline-success">Изменить</button>
 </body>
 </html>

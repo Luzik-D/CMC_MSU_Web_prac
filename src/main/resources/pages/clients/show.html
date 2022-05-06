@@ -46,5 +46,9 @@ here we have all films
 <form th:action="@{/clients/{id}(id=${client.getId()})}" th:method="DELETE">
     <input type="submit" value="Удалить"/>
 </form>
+<!-- button for update -->
+<form th:action="@{/clients/{id}/edit(id=${client.getId()})}" method="get">
+    <button type="submit" class="btn btn-outline-success">Изменить</button>
+</form>
 </body>
 </html>
