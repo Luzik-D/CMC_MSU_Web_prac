@@ -49,5 +49,18 @@ here we have copies
 <!-- button for update -->
 <form th:action="@{/films/{id}/edit(id=${film.getId()})}" method="get">
     <button type="submit" class="btn btn-outline-success">Изменить</button>
+</form>
+<!-- button for all copies -->
+<form th:action="@{/films/{id}(id=${film.getId()})}" method="post">
+    <button type="submit" class="btn btn-outline-success">Все копии</button>
+</form>
+<!-- button for disk copies -->
+<form th:action="@{/copies/filtered/disk-{id}(id=${film.getId()})}" method="get">
+    <button type="submit" class="btn btn-outline-success">Показать диски</button>
+</form>
+<!-- button for cassettes copies -->
+<form th:action="@{/copies/filtered/cassette-{id}(id=${film.getId()})}" method="get">
+    <button type="submit" class="btn btn-outline-success">Показать кассеты</button>
+</form>
 </body>
 </html>

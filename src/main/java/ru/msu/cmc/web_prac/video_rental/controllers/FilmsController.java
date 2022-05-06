@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.msu.cmc.web_prac.video_rental.DAO.CopyDAO;
 import ru.msu.cmc.web_prac.video_rental.DAO.FilmDAO;
 import ru.msu.cmc.web_prac.video_rental.DAO.Impl.CopyDAOImpl;
@@ -41,6 +42,7 @@ public class FilmsController {
     @GetMapping("films/{id}")
     public String show(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("film", filmDAO.getById(id));
+        System.out.printf("hello there films/id");
 
         // get info about disks
         List<Copy> disks = copyDAO.findCopy(id, "Диск", null, null);
@@ -72,7 +74,9 @@ public class FilmsController {
         //add to model
         model.addAttribute("cassettesAmount", cassettesAmount);
         model.addAttribute("cassettePrice", cassettePrice);
+
         return "films/show";
+        //return "/";
     }
 
     @GetMapping("films/new")
@@ -83,7 +87,7 @@ public class FilmsController {
     }
 
     @GetMapping("films/{id}/edit")
-    public String editFilm(@PathVariable("id") Integer id, Model model) {
+    public String edit(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("film", filmDAO.getById(id));
 
         return "films/edit";
@@ -102,6 +106,19 @@ public class FilmsController {
         return "redirect:/";
     }
 
+    /*
+     * get all copies for film
+     * it doesn't redirects to "copies" page, only shows filtered result
+     */
+    @PostMapping("films/{id}")
+    public String getCopies(@ModelAttribute("film") Film film, Model model,
+                            final RedirectAttributes redirectAttributes) {;
+        List<Copy> filmCopies = copyDAO.findCopy(film.getId(), null, null, null);
+
+        model.addAttribute("filmCopies", filmCopies);
+
+        return "copies/filtered";
+    }
     @DeleteMapping("films/{id}")
     public String deleteFilm(@PathVariable("id") Integer id) {
         filmDAO.delete(filmDAO.getById(id));
