@@ -6,21 +6,21 @@
         crossorigin="anonymous">
 
   <meta charset="UTF-8">
-  <title>Фильтр</title>
+  <title>record</title>
 </head>
 <body>
 <!-- Navigation Panel -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">Фильмы</a>
+    <a class="navbar-brand" href="#">История транзакций</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="/clients">Клиенты</a>
+        <a class="nav-link active" aria-current="page" href="/">Фильмы</a>
         <!-- make info pages -->
-        <a class="nav-link" href="/records">История транзакций</a>
+        <a class="nav-link" href="/clients">Клиенты</a>
         <a class="nav-link" href="#">Информация</a>
         <a class="nav-link" href="#">Контакты</a>
       </div>
@@ -28,13 +28,12 @@
   </div>
 </nav>
 <!-- Search form -->
-<!-- https://spring-projects.ru/guides/handling-form-submission -->
-<!-- get all films -->
-<div class="list-group">
-  <div th:each="film : ${filteredFilms}">
-    <!--<a th:href="@{/films/{id}(id=${film.getId()})}" th:text="${film.getTitle()}">film</a>-->
-    <a th:href="@{/films/{id}(id=${film.getId()})}" class="list-group-item list-group-item-action" th:text="${film.getTitle()}">film</a>
-  </div>
+<h1>Список транзакций клиента</h1>
+<div th:each="record : ${clientRecords}">
+  <p th:text="'Копия: ' + ${record.getCopy().getId()} + '; ' +
+              'Дата оплаты: ' + ${record.getDateOfTransfer()} + '; ' +
+              'Стоимость заказа: ' + ${record.getTransferAmount()}">
+  </p>
 </div>
 </body>
 </html>
