@@ -154,15 +154,17 @@ public class CopiesController {
             return "/";
         }
 
+        Copy copy = copyDAO.getById(id);
+        Integer amount = copy.getPrice();
         //hardcode
         ClientHistoryRecord record = new ClientHistoryRecord(
                 clientList.get(0),
-                null,
+                copy,
                 //copyDAO.getById(transaction.getCopyId()),
                 transaction.getDate(),
                 "2022-05-27",
                 "2022-05-27",
-                transaction.getAmount()
+                amount
         );
 
         recordDAO.save(record);
