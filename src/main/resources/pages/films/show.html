@@ -62,5 +62,9 @@ here we have copies
 <form th:action="@{/copies/filtered/cassette-{id}(id=${film.getId()})}" method="get">
     <button type="submit" class="btn btn-outline-success">Показать кассеты</button>
 </form>
+<!-- button for new copy -->
+<form th:action="@{/copies/new-{id}(id=${film.getId()})}" method="get">
+    <button type="submit" class="btn btn-outline-success">Создать</button>
+</form>
 </body>
 </html>

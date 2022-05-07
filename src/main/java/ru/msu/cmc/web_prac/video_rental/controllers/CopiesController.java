@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.msu.cmc.web_prac.video_rental.DAO.CopyDAO;
+import ru.msu.cmc.web_prac.video_rental.DAO.FilmDAO;
 import ru.msu.cmc.web_prac.video_rental.DAO.Impl.CopyDAOImpl;
+import ru.msu.cmc.web_prac.video_rental.DAO.Impl.FilmDAOImpl;
 import ru.msu.cmc.web_prac.video_rental.tables.Copy;
 import ru.msu.cmc.web_prac.video_rental.tables.Film;
 
@@ -19,6 +21,9 @@ public class CopiesController {
 
     @Autowired
     private final CopyDAO copyDAO = new CopyDAOImpl();
+
+    @Autowired
+    private final FilmDAO filmDAO = new FilmDAOImpl();
 
     @GetMapping()
     public String index(Model model) {
@@ -58,10 +63,55 @@ public class CopiesController {
 
         return "copies/filtered_disks";
     }
+
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("copy", copyDAO.getById(id));
+
+        return "copies/edit";
+    }
+
+    @GetMapping("/new-{id}")
+    public String newCopy(@PathVariable("id") Integer id, Model model) {
+        //set film id to new copy (for thymeleaf creating url)
+        Copy newCopy = new Copy();
+        Film film = filmDAO.getById(id);
+        newCopy.setFilm(film);
+        model.addAttribute("newCopy", newCopy);
+
+        return "copies/new";
+    }
     @PostMapping("/filtered")
     public String filtered(@ModelAttribute("film") Film film, Model model) {
         System.out.printf("DISK COPIES" + film);
         return"copies/filtered";
+    }
+
+    @PostMapping("/new-{id}")
+    public String createCopy(@PathVariable("id") Integer id, @ModelAttribute("newCopy") Copy copy) {
+        //get film id
+        Copy filmCopy = copyDAO.getById(id);
+        copy.setFilm(filmCopy.getFilm());
+        copyDAO.save(copy);
+
+        return "redirect:/copies";
+
+    }
+    @PatchMapping("/{id}")
+    public String updateCopy(@PathVariable("id") Integer id, @ModelAttribute("copy") Copy copy) {
+        //save film id (we can't change film_id of copy)
+        Copy filmCopy = copyDAO.getById(id);
+        copy.setFilm(filmCopy.getFilm());
+        copyDAO.update(copy);
+
+        return "redirect:/copies";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteCopy(@PathVariable("id") Integer id) {
+        copyDAO.delete(copyDAO.getById(id));
+
+        return "redirect:/copies";
     }
 
 

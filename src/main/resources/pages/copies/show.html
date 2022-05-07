@@ -34,5 +34,13 @@ copy
 <p th:text="'Тип носителя: ' + ${copy.getType()}"></p>
 <p th:text="'Статус: ' + ${copy.getStatus()}"></p>
 <p th:text="'Цена: ' + ${copy.getPrice()}"></p>
+<!-- button for delete -->
+<form th:action="@{/copies/{id}(id=${copy.getId()})}" th:method="DELETE">
+    <input type="submit" value="Удалить"/>
+</form>
+<!-- button for update -->
+<form th:action="@{/copies/{id}/edit(id=${copy.getId()})}" method="get">
+    <button type="submit" class="btn btn-outline-success">Изменить</button>
+</form>
 </body>
 </html>
