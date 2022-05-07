@@ -4,10 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ru.msu.cmc.web_prac.video_rental.DAO.ClientDAO;
+import ru.msu.cmc.web_prac.video_rental.DAO.ClientHistoryRecordDAO;
 import ru.msu.cmc.web_prac.video_rental.DAO.CopyDAO;
 import ru.msu.cmc.web_prac.video_rental.DAO.FilmDAO;
+import ru.msu.cmc.web_prac.video_rental.DAO.Impl.ClientDAOImpl;
+import ru.msu.cmc.web_prac.video_rental.DAO.Impl.ClientHistoryRecordImpl;
 import ru.msu.cmc.web_prac.video_rental.DAO.Impl.CopyDAOImpl;
 import ru.msu.cmc.web_prac.video_rental.DAO.Impl.FilmDAOImpl;
+import ru.msu.cmc.web_prac.video_rental.tables.Client;
+import ru.msu.cmc.web_prac.video_rental.tables.ClientHistoryRecord;
 import ru.msu.cmc.web_prac.video_rental.tables.Copy;
 import ru.msu.cmc.web_prac.video_rental.tables.Film;
 
@@ -24,6 +30,12 @@ public class CopiesController {
 
     @Autowired
     private final FilmDAO filmDAO = new FilmDAOImpl();
+
+    @Autowired
+    private final ClientDAO clientDAO = new ClientDAOImpl();
+
+    @Autowired
+    private final ClientHistoryRecordDAO recordDAO = new ClientHistoryRecordImpl();
 
     @GetMapping()
     public String index(Model model) {
@@ -114,5 +126,48 @@ public class CopiesController {
         return "redirect:/copies";
     }
 
+    /* * * * * * * * * * * * * * * * * *
+     * Controller part for order copy  *
+     * * * * * * * * * * * * * * * * * */
 
+    @GetMapping("/order-{id}")
+    public String order(@PathVariable("id") Integer id, Model model) {
+        //for copy data
+        model.addAttribute("orderCopy", copyDAO.getById(id));
+
+        TransactionObject transaction = new TransactionObject();
+        model.addAttribute("transaction", transaction);
+
+        return "copies/order";
+    }
+
+    @PostMapping("/order-{id}")
+    public String makeOrder(@PathVariable("id") Integer id,
+                            @ModelAttribute("transaction") TransactionObject transaction) {
+        List<Client> clientList = clientDAO.getClientByPhone(transaction.getClientPhone());
+        if(clientList.size() == 0) {
+            // no client
+            return "/";
+        }
+        if(clientList.size() > 1) {
+            // phone is not unique
+            return "/";
+        }
+
+        //hardcode
+        ClientHistoryRecord record = new ClientHistoryRecord(
+                clientList.get(0),
+                null,
+                //copyDAO.getById(transaction.getCopyId()),
+                transaction.getDate(),
+                "2022-05-27",
+                "2022-05-27",
+                transaction.getAmount()
+        );
+
+        recordDAO.save(record);
+
+        return "redirect:/copies";
+    }
 }
+

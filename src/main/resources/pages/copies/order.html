@@ -27,24 +27,13 @@
         </div>
     </div>
 </nav>
-copy
-<p th:text="'Id: ' + ${copy.getId()}"></p>
-<!-- change filmId to filmName -->
-<p th:text="'Фильм: ' + ${copy.getFilm().getTitle()}"></p>
-<p th:text="'Тип носителя: ' + ${copy.getType()}"></p>
-<p th:text="'Статус: ' + ${copy.getStatus()}"></p>
-<p th:text="'Цена: ' + ${copy.getPrice()}"></p>
-<!-- button for delete -->
-<form th:action="@{/copies/{id}(id=${copy.getId()})}" th:method="DELETE">
-    <input type="submit" value="Удалить"/>
-</form>
-<!-- button for update -->
-<form th:action="@{/copies/{id}/edit(id=${copy.getId()})}" method="get">
-    <button type="submit" class="btn btn-outline-success">Изменить</button>
-</form>
-<!-- button for order -->
-<form th:action="@{/copies/order-{id}/(id=${copy.getId()})}" method="get">
-    <button type="submit" class="btn btn-outline-success">Заказать копию</button>
+<h1>Заказать копию</h1>
+<form th:action="@{/copies/order-{id}(id=${orderCopy.getId()})}" th:object="${transaction}" method="post">
+    <p>Телефон: <input type="text" th:field="*{clientPhone}"/></p>
+    <p>Копия: <input type="text" th:field="*{copyId}"/></p>
+    <p>Дата: <input type="text" th:field="*{date}"/></p>
+    <p>Стоимость: <input type="text" th:field="*{amount}"/></p>
+    <p><input type="submit" value="Заказать"></p>
 </form>
 </body>
 </html>
