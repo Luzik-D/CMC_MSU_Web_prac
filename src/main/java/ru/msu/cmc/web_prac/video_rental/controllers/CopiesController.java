@@ -104,9 +104,19 @@ public class CopiesController {
     }
 
     @PostMapping("/new-{id}")
-    public String createCopy(@PathVariable("id") Integer id, @ModelAttribute("newCopy") Copy copy) {;
+    public String createCopy(@PathVariable("id") Integer id, @ModelAttribute("newCopy") Copy copy, Model model) {;
         copy.setFilm(filmDAO.getById(id));
+        Integer price = copy.getPrice();
         System.out.printf("copy film " + copy.getFilm().getTitle() + '\n');
+        if(
+            copy.getStatus().isEmpty() ||
+            copy.getType().isEmpty() ||
+            price == null
+        ) {
+            model.addAttribute("errorCopy", copy);
+            model.addAttribute("price", price);
+            return "copies/error";
+        }
         copyDAO.save(copy);
 
         return "redirect:/films/{id}";
