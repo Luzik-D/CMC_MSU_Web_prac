@@ -154,6 +154,7 @@ public class CopiesController {
             return "copies/order_error";
         }
 
+
         Copy copy = copyDAO.getById(id);
         Integer amount = copy.getPrice();
         //hardcode

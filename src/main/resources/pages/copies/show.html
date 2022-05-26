@@ -44,7 +44,9 @@ copy
 </form>
 <!-- button for order -->
 <form th:action="@{/copies/order-{id}/(id=${copy.getId()})}" method="get">
-    <button type="submit" class="btn btn-outline-success">Заказать копию</button>
+    <div th:if="${copy.getStatus} != 'Используется'">
+        <button type="submit" class="btn btn-outline-success">Заказать копию</button>
+    </div>
 </form>
 </body>
 </html>
