@@ -1,6 +1,7 @@
 package ru.msu.cmc.web_prac.video_rental.tables;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.security.GeneralSecurityException;

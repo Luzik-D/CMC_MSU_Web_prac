@@ -6,7 +6,7 @@ CREATE TABLE Client (
 );
 
 CREATE TABLE Film (
-                      film_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                      film_id INT PRIMARY KEY  AUTO_INCREMENT,
                       title TEXT NOT NULL,
                       company TEXT NOT NULL,
                       director TEXT NOT NULL,
@@ -15,12 +15,12 @@ CREATE TABLE Film (
 );
 
 CREATE TABLE Copy (
-                      copy_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+                      copy_id INT PRIMARY KEY AUTO_INCREMENT,
                       film_id INT,
                       type TEXT NOT NULL,
                       status TEXT NOT NULL,
                       price INT,
-                      FOREIGN KEY (film_id) REFERENCES Film(film_id)
+                      FOREIGN KEY (film_id) REFERENCES Film(film_id) ON DELETE CASCADE
 );
 
 CREATE TABLE ClientHistoryRecord (
@@ -32,8 +32,8 @@ CREATE TABLE ClientHistoryRecord (
                                      actual_date_of_receipt DATE NOT NULL,
                                      transfer_amount INT NOT NULL,
 
-                                     FOREIGN KEY (client_id) REFERENCES Client(client_id),
-                                     FOREIGN KEY (copy_id) REFERENCES Copy(copy_id)
+                                     FOREIGN KEY (client_id) REFERENCES Client(client_id) ON DELETE CASCADE,
+                                     FOREIGN KEY (copy_id) REFERENCES Copy(copy_id) ON DELETE CASCADE
 );
 
 /* INTO Client table */

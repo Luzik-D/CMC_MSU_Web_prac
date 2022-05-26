@@ -30,22 +30,22 @@
 <!-- Search form -->
     <h1>Поиск фильма</h1>
     <form action="#" th:action="@{/films/filtered}" th:object="${filter}" method="post">
-        <p>Название: <input type="text" th:field="*{title}"/></p>
-        <p>Компания: <input type="text" th:field="*{company}"/></p>
-        <p>Режиссер: <input type="text" th:field="*{director}"/></p>
-        <p>Год выпуска: <input type="text" th:field="*{yearOfRelease}"/></p>
-        <p><input type="submit" value="Найти"/></p>
+        <p>Название: <input id="filmTitle" type="text" th:field="*{title}"/></p>
+        <p>Компания: <input id="filmCompany" type="text" th:field="*{company}"/></p>
+        <p>Режиссер: <input id="filmDirector" type="text" th:field="*{director}"/></p>
+        <p>Год выпуска: <input id="filmYear" type="text" th:field="*{yearOfRelease}"/></p>
+        <p><input id="buttonSubmit" type="submit" value="Найти"/></p>
     </form>
 <!-- get all films -->
 <div class="list-group">
     <div th:each="film : ${films}">
         <!--<a th:href="@{/films/{id}(id=${film.getId()})}" th:text="${film.getTitle()}">film</a>-->
-        <a th:href="@{/films/{id}(id=${film.getId()})}" class="list-group-item list-group-item-action" th:text="${film.getTitle()}">film</a>
+        <a id="filmId" th:href="@{/films/{id}(id=${film.getId()})}" class="list-group-item list-group-item-action" th:text="${film.getTitle()}">film</a>
     </div>
 </div>
 <!-- button for new film -->
 <form action="/films/new">
-    <button type="submit" class="btn btn-outline-success">Создать</button>
+    <button id="createButton" type="submit" class="btn btn-outline-success">Создать</button>
 </form>
 </body>
 </html>

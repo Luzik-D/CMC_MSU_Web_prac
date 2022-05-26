@@ -6,7 +6,7 @@
           crossorigin="anonymous">
 
     <meta charset="UTF-8">
-    <title>Фильм</title>
+    <title>Создание фильма</title>
 </head>
 <body>
 <!-- Navigation Panel -->
@@ -28,14 +28,14 @@
     </div>
 </nav>
 <!-- Create form -->
-<h1>Поиск фильма</h1>
+<h1>Создание фильма</h1>
 <form action="#" th:action="@{/films/new}" th:object="${newFilm}" method="post">
-    <p>Название: <input type="text" th:field="*{title}"/></p>
-    <p>Компания: <input type="text" th:field="*{company}"/></p>
-    <p>Режиссер: <input type="text" th:field="*{director}"/></p>
-    <p>Год выпуска: <input type="text" th:field="*{yearOfRelease}"/></p>
-    <p>Описание: <input type="text" th:field="*{description}"/></p>
-    <p><input type="submit" value="Создать"/></p>
+    <p>Название: <input id="filmTitle" type="text" th:field="*{title}"/></p>
+    <p>Компания: <input id="filmCompany" type="text" th:field="*{company}"/></p>
+    <p>Режиссер: <input id="filmDirector" type="text" th:field="*{director}"/></p>
+    <p>Год выпуска: <input id="filmYear" type="text" th:field="*{yearOfRelease}"/></p>
+    <p>Описание: <input id="filmDescription" type="text" th:field="*{description}"/></p>
+    <p><input id="createButton" type="submit" value="Создать"/></p>
 </form>
 </body>
 </html>
