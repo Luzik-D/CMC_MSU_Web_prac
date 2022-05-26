@@ -31,10 +31,16 @@
 <!-- https://spring-projects.ru/guides/handling-form-submission -->
 <!-- get all films -->
 <div class="list-group">
-  <div th:each="film : ${filteredFilms}">
-    <!--<a th:href="@{/films/{id}(id=${film.getId()})}" th:text="${film.getTitle()}">film</a>-->
-    <a th:href="@{/films/{id}(id=${film.getId()})}" class="list-group-item list-group-item-action" th:text="${film.getTitle()}">film</a>
+  <div th:if="${filteredFilms.size()} != 0">
+    <div th:each="film : ${filteredFilms}">
+      <!--<a th:href="@{/films/{id}(id=${film.getId()})}" th:text="${film.getTitle()}">film</a>-->
+      <a th:href="@{/films/{id}(id=${film.getId()})}" class="list-group-item list-group-item-action" th:text="${film.getTitle()}">film</a>
+    </div>
   </div>
+  <div th:if="${filteredFilms.size()} == 0">
+    Не найдено
+  </div>
+
 </div>
 </body>
 </html>

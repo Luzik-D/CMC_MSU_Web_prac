@@ -28,8 +28,13 @@
     </div>
 </nav>
 <!-- Search form -->
-<div th:each="record : ${filteredRecords}">
-    <p th:text="'found transaction for client: ' + ${record.getClient().getName()}"></p>
+<div th:if="${filteredRecords.size()} != 0">
+    <div th:each="record : ${filteredRecords}">
+        <p th:text="'found transaction for client: ' + ${record.getClient().getName()}"></p>
+    </div>
+</div>
+<div th:if="${filteredRecords.size()} == 0">
+    Не найдено
 </div>
 </body>
 </html>

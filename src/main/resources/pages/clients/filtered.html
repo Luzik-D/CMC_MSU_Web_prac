@@ -29,8 +29,13 @@
 </nav>
 <!-- get all clients -->
 <div class="list-group">
-    <div th:each="client : ${filteredClients}">
-        <a th:href="@{/clients/{id}(id=${client.getId()})}" class="list-group-item list-group-item-action" th:text="${client.getName()}">client</a>
+    <div th:if="${filteredClients.size()} != 0">
+        <div th:each="client : ${filteredClients}">
+            <a th:href="@{/clients/{id}(id=${client.getId()})}" class="list-group-item list-group-item-action" th:text="${client.getName()}">client</a>
+        </div>
+    </div>
+    <div th:if="${filteredClients.size()} == 0">
+        Не найдено
     </div>
 </div>
 </body>
