@@ -89,7 +89,11 @@ public class CopiesController {
         Copy newCopy = new Copy();
         Film film = filmDAO.getById(id);
         newCopy.setFilm(film);
+        //copyDAO.save(newCopy);
         model.addAttribute("newCopy", newCopy);
+
+        System.out.printf("NEW copy film: " + newCopy.getFilm().getTitle() + '\n');
+        System.out.printf("NEW COPY id " + newCopy.getId() + '\n');
 
         return "copies/new";
     }
@@ -100,13 +104,12 @@ public class CopiesController {
     }
 
     @PostMapping("/new-{id}")
-    public String createCopy(@PathVariable("id") Integer id, @ModelAttribute("newCopy") Copy copy) {
-        //get film id
-        Copy filmCopy = copyDAO.getById(id);
-        copy.setFilm(filmCopy.getFilm());
+    public String createCopy(@PathVariable("id") Integer id, @ModelAttribute("newCopy") Copy copy) {;
+        copy.setFilm(filmDAO.getById(id));
+        System.out.printf("copy film " + copy.getFilm().getTitle() + '\n');
         copyDAO.save(copy);
 
-        return "redirect:/copies";
+        return "redirect:/films/{id}";
 
     }
     @PatchMapping("/{id}")
