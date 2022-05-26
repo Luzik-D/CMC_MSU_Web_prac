@@ -6,19 +6,19 @@
           crossorigin="anonymous">
 
     <meta charset="UTF-8">
-    <title>Фильм</title>
+    <title>Ошибка</title>
 </head>
 <body>
 <!-- Navigation Panel -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Фильмы</a>
+        <a class="navbar-brand" href="/">Клиенты</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="/clients">Клиенты</a>
+                <a class="nav-link active" aria-current="page" href="/">Фильмы</a>
                 <!-- make info pages -->
                 <a class="nav-link" href="/records">История транзакций</a>
                 <a class="nav-link" href="#">Информация</a>
@@ -27,15 +27,20 @@
         </div>
     </div>
 </nav>
-<!-- Create form -->
-<h1>Редактирование фильма</h1>
-<form th:action="@{/films/{id}(id=${film.getId()})}" th:object="${film}" th:method="PATCH">
-    <p>Название: <input type="text" th:field="*{title}"/></p>
-    <p>Компания: <input type="text" th:field="*{company}"/></p>
-    <p>Режиссер: <input type="text" th:field="*{director}"/></p>
-    <p>Год выпуска: <input type="text" th:field="*{yearOfRelease}"/></p>
-    <p>Описание: <input type="text" th:field="*{description}"/></p>
-    <p><input type="submit" value="Подтвердить"/></p>
-</form>
+
+<h1>Ошибка</h1>
+
+<div th:if="${errorClient.getName().isEmpty()}">
+    Не указано имя клиента.
+</div>
+<div th:if="${errorClient.getPhone().isEmpty()}">
+    Не указан телефон клиента.
+</div>
+<div th:if="${errorClient.getAddress().isEmpty()}">
+    Не указан адрес клиента.
+</div>
+<div th:if="${errorClient.getPhone.length()} != 11">
+    Номер телефона указан некорректно.
+</div>
 </body>
 </html>

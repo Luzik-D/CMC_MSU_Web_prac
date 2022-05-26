@@ -77,15 +77,23 @@ public class ClientsController {
     }
 
     @PostMapping("/new")
-    public String createClient(@ModelAttribute("newClient") Client client) {
-
-        System.out.printf("hello new client");
-        System.out.println("name" + client.getName());
+    public String createClient(@ModelAttribute("newClient") Client client, Model model) {
+        //error cases
+        if(
+           client.getName().isEmpty() ||
+           client.getPhone().isEmpty() ||
+           client.getAddress().isEmpty() ||
+           client.getPhone().length() != 11
+        ) {
+            model.addAttribute("errorClient", client);
+            return "clients/error";
+        }
         clientDAO.save(client);
-        System.out.println("name" + client.getName());
 
         return "redirect:/clients";
     }
+
+
 
     @DeleteMapping("/{id}")
     public String deleteClient(@PathVariable("id") Integer id) {
@@ -95,7 +103,17 @@ public class ClientsController {
     }
 
     @PatchMapping("/{id}")
-    public String updateClient(@PathVariable("id") Integer id, @ModelAttribute("client") Client client) {
+    public String updateClient(@ModelAttribute("client") Client client, Model model) {
+        //error cases
+        if(
+            client.getName().isEmpty() ||
+            client.getPhone().isEmpty() ||
+            client.getAddress().isEmpty() ||
+            client.getPhone().length() != 11
+        ) {
+            model.addAttribute("errorClient", client);
+            return "clients/error";
+        }
         clientDAO.update(client);
         return "redirect:/clients";
     }

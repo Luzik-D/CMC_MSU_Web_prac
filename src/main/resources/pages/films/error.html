@@ -6,7 +6,7 @@
           crossorigin="anonymous">
 
     <meta charset="UTF-8">
-    <title>Фильм</title>
+    <title>Ошибка</title>
 </head>
 <body>
 <!-- Navigation Panel -->
@@ -26,16 +26,24 @@
             </div>
         </div>
     </div>
-</nav>
-<!-- Create form -->
-<h1>Редактирование фильма</h1>
-<form th:action="@{/films/{id}(id=${film.getId()})}" th:object="${film}" th:method="PATCH">
-    <p>Название: <input type="text" th:field="*{title}"/></p>
-    <p>Компания: <input type="text" th:field="*{company}"/></p>
-    <p>Режиссер: <input type="text" th:field="*{director}"/></p>
-    <p>Год выпуска: <input type="text" th:field="*{yearOfRelease}"/></p>
-    <p>Описание: <input type="text" th:field="*{description}"/></p>
-    <p><input type="submit" value="Подтвердить"/></p>
-</form>
+</nav>>
+
+<h1>Ошибка</h1>
+
+<div th:if="${errorFilm.getTitle().isEmpty}">
+    Не указано название фильма.
+</div>
+<div th:if="${errorFilm.getCompany().isEmpty}">
+    Не указана компания.
+</div>
+<div th:if="${errorFilm.getDirector().isEmpty}">
+    Не указан режиссер фильма.
+</div>
+<div th:if="${errorFilm.getYearOfRelease().isEmpty}">
+    Не указан год выпуска фильма.
+</div>
+<div th:if="${errorFilm.getYearOfRelease().length()} > 4">
+    Год указан некорректно.
+</div>
 </body>
 </html>
