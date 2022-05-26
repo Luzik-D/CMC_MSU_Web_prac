@@ -14,6 +14,7 @@ import ru.msu.cmc.web_prac.video_rental.DAO.FilmDAO;
 import ru.msu.cmc.web_prac.video_rental.tables.Film;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 
@@ -34,7 +35,7 @@ public class CopyDAOTest {
         Copy copy = copyDAO.getById(2);
 
         assertNotNull(copy);
-        assertEquals(450, copy.getPrice());
+        assertEquals(Optional.of(450), copy.getPrice());
     }
 
     @Test
@@ -68,12 +69,12 @@ public class CopyDAOTest {
         copy.setPrice(1000);
         copyDAO.update(copy);
         copy = copyDAO.getById(1);
-        assertEquals(1000, copy.getPrice());
+        assertEquals(Optional.of(1000), copy.getPrice());
 
         //return to valid data
         copy.setPrice(550);
         copyDAO.update(copy);
-        assertEquals(550, copy.getPrice());
+        assertEquals(Optional.of(550), copy.getPrice());
     }
 
     @Test
