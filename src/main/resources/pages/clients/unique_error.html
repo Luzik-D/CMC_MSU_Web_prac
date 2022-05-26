@@ -29,19 +29,8 @@
 </nav>
 
 <h1>Ошибка</h1>
-
-<div th:if="${errorClient.getName().isEmpty()}">
-    Не указано имя клиента.
+<div th:if="${uniqueError}">
+    Такой номер телефона уже существует
 </div>
-<div th:if="${errorClient.getPhone().isEmpty()}">
-    Не указан телефон клиента.
-</div>
-<div th:if="${errorClient.getAddress().isEmpty()}">
-    Не указан адрес клиента.
-</div>
-<div th:if="${errorClient.getPhone.length()} != 11">
-    Номер телефона указан некорректно.
-</div>
-
 </body>
 </html>

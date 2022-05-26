@@ -12,13 +12,13 @@
 <!-- Navigation Panel -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Клиенты</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="/">Фильмы</a>
+                <a class="nav-link" href="/">Фильмы</a>
+                <a class="nav-link" href="/clients">Клиенты</a>
                 <!-- make info pages -->
                 <a class="nav-link" href="/records">История транзакций</a>
                 <a class="nav-link" href="#">Информация</a>
@@ -29,19 +29,6 @@
 </nav>
 
 <h1>Ошибка</h1>
-
-<div th:if="${errorClient.getName().isEmpty()}">
-    Не указано имя клиента.
-</div>
-<div th:if="${errorClient.getPhone().isEmpty()}">
-    Не указан телефон клиента.
-</div>
-<div th:if="${errorClient.getAddress().isEmpty()}">
-    Не указан адрес клиента.
-</div>
-<div th:if="${errorClient.getPhone.length()} != 11">
-    Номер телефона указан некорректно.
-</div>
-
+Клиента с таким номером не существует.
 </body>
 </html>

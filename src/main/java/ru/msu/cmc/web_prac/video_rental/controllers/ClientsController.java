@@ -88,7 +88,16 @@ public class ClientsController {
             model.addAttribute("errorClient", client);
             return "clients/error";
         }
+
+        //phone number is not unique
+        if(clientDAO.findClient(null, client.getPhone(), null).size() > 0) {
+            model.addAttribute("uniqueError", 1);
+            return "clients/unique_error";
+        }
+
         clientDAO.save(client);
+
+        model.addAttribute("uniqueError", 0);
 
         return "redirect:/clients";
     }
@@ -114,7 +123,16 @@ public class ClientsController {
             model.addAttribute("errorClient", client);
             return "clients/error";
         }
+
+        //phone number is not unique
+        if(clientDAO.findClient(null, client.getPhone(), null).size() > 0) {
+            model.addAttribute("uniqueError", 1);
+            return "clients/unique_error";
+        }
+
         clientDAO.update(client);
+
+        model.addAttribute("uniqueError", 0);
         return "redirect:/clients";
     }
 }

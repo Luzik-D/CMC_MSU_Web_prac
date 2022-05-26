@@ -146,15 +146,12 @@ public class CopiesController {
 
     @PostMapping("/order-{id}")
     public String makeOrder(@PathVariable("id") Integer id,
-                            @ModelAttribute("transaction") TransactionObject transaction) {
+                            @ModelAttribute("transaction") TransactionObject transaction, Model model) {
+
         List<Client> clientList = clientDAO.getClientByPhone(transaction.getClientPhone());
-        if(clientList.size() == 0) {
+        if(clientList == null) {
             // no client
-            return "/";
-        }
-        if(clientList.size() > 1) {
-            // phone is not unique
-            return "/";
+            return "copies/order_error";
         }
 
         Copy copy = copyDAO.getById(id);
@@ -170,6 +167,10 @@ public class CopiesController {
                 amount
         );
 
+        //now copy is used
+        copy.setStatus("Используется");
+
+        copyDAO.update(copy);
         recordDAO.save(record);
 
         return "redirect:/copies";
