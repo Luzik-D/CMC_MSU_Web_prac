@@ -27,13 +27,16 @@
     </div>
   </div>
 </nav>
-<!-- Search form -->
+
 <h1>Список транзакций клиента</h1>
-<div th:each="record : ${clientRecords}">
-  <p th:text="'Копия: ' + ${record.getCopy().getId()} + '; ' +
-              'Дата оплаты: ' + ${record.getDateOfTransfer()} + '; ' +
-              'Стоимость заказа: ' + ${record.getTransferAmount()}">
-  </p>
+<div th:if="${clientRecords.size()} != 0">
+  <div th:each="record : ${clientRecords}">
+    <p th:text="'Копия: ' + ${record.getCopy().getId()} + '; ' +
+                'Дата оплаты: ' + ${record.getDateOfTransfer()} + '; ' +
+                'Стоимость заказа: ' + ${record.getTransferAmount()}">
+    </p>
+  </div>
 </div>
+
 </body>
 </html>

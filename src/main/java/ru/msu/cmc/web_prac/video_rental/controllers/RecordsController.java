@@ -48,7 +48,8 @@ public class RecordsController {
         List<Client> clientList = clientDAO.findClient(client.getName(), client.getPhone(), null);
         if(clientList.size() == 0) {
             //no clients
-            return "/";
+            model.addAttribute("filteredRecords", recordList);
+            return "/records/filtered";
         }
         for(int i = 0; i < clientList.size(); i++) {
             recordList.addAll(recordDAO.findRecord(clientList.get(i).getId(), null, client.getAddress(), null, null, null));
