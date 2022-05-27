@@ -6,13 +6,13 @@
           crossorigin="anonymous">
 
     <meta charset="UTF-8">
-    <title>Клиенты</title>
+    <title>Отфильтрованные клиенты</title>
 </head>
 <body>
 <!-- Navigation Panel -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/clients">Клиенты</a>
+        <a id="toMainPage" class="navbar-brand" href="/clients">Клиенты</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -29,8 +29,13 @@
 </nav>
 <!-- get all clients -->
 <div class="list-group">
-    <div th:each="client : ${filteredClients}">
-        <a th:href="@{/clients/{id}(id=${client.getId()})}" class="list-group-item list-group-item-action" th:text="${client.getName()}">client</a>
+    <div th:if="${filteredClients.size()} != 0">
+        <div th:each="client : ${filteredClients}">
+            <a id="clientId" th:href="@{/clients/{id}(id=${client.getId()})}" class="list-group-item list-group-item-action" th:text="${client.getName()}">client</a>
+        </div>
+    </div>
+    <div th:if="${filteredClients.size()} == 0">
+        Не найдено
     </div>
 </div>
 </body>

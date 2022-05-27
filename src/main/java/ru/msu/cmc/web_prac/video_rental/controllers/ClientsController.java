@@ -77,15 +77,32 @@ public class ClientsController {
     }
 
     @PostMapping("/new")
-    public String createClient(@ModelAttribute("newClient") Client client) {
+    public String createClient(@ModelAttribute("newClient") Client client, Model model) {
+        //error cases
+        if(
+           client.getName().isEmpty() ||
+           client.getPhone().isEmpty() ||
+           client.getAddress().isEmpty() ||
+           client.getPhone().length() != 11
+        ) {
+            model.addAttribute("errorClient", client);
+            return "clients/error";
+        }
 
-        System.out.printf("hello new client");
-        System.out.println("name" + client.getName());
+        //phone number is not unique
+        if(clientDAO.findClient(null, client.getPhone(), null).size() > 0) {
+            model.addAttribute("uniqueError", 1);
+            return "clients/unique_error";
+        }
+
         clientDAO.save(client);
-        System.out.println("name" + client.getName());
+
+        model.addAttribute("uniqueError", 0);
 
         return "redirect:/clients";
     }
+
+
 
     @DeleteMapping("/{id}")
     public String deleteClient(@PathVariable("id") Integer id) {
@@ -95,8 +112,30 @@ public class ClientsController {
     }
 
     @PatchMapping("/{id}")
-    public String updateClient(@PathVariable("id") Integer id, @ModelAttribute("client") Client client) {
+    public String updateClient(@PathVariable("id") Integer id,
+                               @ModelAttribute("client") Client client, Model model) {
+        //error cases
+        if(
+            client.getName().isEmpty() ||
+            client.getPhone().isEmpty() ||
+            client.getAddress().isEmpty() ||
+            client.getPhone().length() != 11
+        ) {
+            model.addAttribute("errorClient", client);
+            return "clients/error";
+        }
+
+        //phone number is not unique
+        System.out.printf("PHONE " + clientDAO.getById(id).getPhone() + '\n');
+        if(clientDAO.findClient(null, client.getPhone(), null).size() > 0 &&
+           !clientDAO.getById(id).getPhone().equals(client.getPhone())) {
+            model.addAttribute("uniqueError", 1);
+            return "clients/unique_error";
+        }
+
         clientDAO.update(client);
+
+        model.addAttribute("uniqueError", 0);
         return "redirect:/clients";
     }
 }

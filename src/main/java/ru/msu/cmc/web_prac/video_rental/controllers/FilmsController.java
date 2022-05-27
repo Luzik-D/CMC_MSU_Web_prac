@@ -42,7 +42,6 @@ public class FilmsController {
     @GetMapping("films/{id}")
     public String show(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("film", filmDAO.getById(id));
-        System.out.printf("hello there films/id");
 
         // get info about disks
         List<Copy> disks = copyDAO.findCopy(id, "Диск", null, null);
@@ -100,7 +99,20 @@ public class FilmsController {
     }
 
     @PostMapping("films/new")
-    public String createFilm(@ModelAttribute("newFilm") Film film) {
+    public String createFilm(@ModelAttribute("newFilm") Film film, Model model) {
+        //error cases
+        if(
+            film.getTitle().isEmpty() ||
+            film.getDirector().isEmpty() ||
+            film.getYearOfRelease().isEmpty() ||
+            film.getCompany().isEmpty() ||
+            film.getDescription().isEmpty() ||
+            film.getYearOfRelease().length() > 4
+        ) {
+            model.addAttribute("errorFilm", film);
+            return "films/error";
+        }
+
         filmDAO.save(film);
 
         return "redirect:/";
@@ -127,9 +139,22 @@ public class FilmsController {
     }
 
     @PatchMapping("films/{id}")
-    public String updateFilm(@ModelAttribute("film") Film film) {
+    public String updateFilm(@ModelAttribute("film") Film film, Model model) {
+        //error cases
+        if(
+            film.getTitle().isEmpty() ||
+            film.getDirector().isEmpty() ||
+            film.getYearOfRelease().isEmpty() ||
+            film.getCompany().isEmpty() ||
+            film.getDescription().isEmpty() ||
+            film.getYearOfRelease().length() > 4
+        ) {
+            model.addAttribute("errorFilm", film);
+            return "films/error";
+        }
         filmDAO.update(film);
 
         return "redirect:/";
     }
+
 }

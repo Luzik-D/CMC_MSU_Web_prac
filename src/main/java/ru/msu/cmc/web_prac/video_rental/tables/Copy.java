@@ -1,6 +1,7 @@
 package ru.msu.cmc.web_prac.video_rental.tables;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.security.GeneralSecurityException;
@@ -30,7 +31,7 @@ public class Copy implements AbstractTable {
     private String status;
 
     @Column(name = "price", nullable = false)
-    private int price;
+    private Integer price;
 
     public Copy(Film film, String type, String status, int price) {
         this.film = film;

@@ -44,23 +44,27 @@ here we have copies
 </div>
 <!-- button for delete -->
 <form th:action="@{/films/{id}(id=${film.getId()})}" th:method="DELETE">
-    <input type="submit" value="Удалить"/>
+    <input id="deleteButton" type="submit" value="Удалить"/>
 </form>
 <!-- button for update -->
 <form th:action="@{/films/{id}/edit(id=${film.getId()})}" method="get">
-    <button type="submit" class="btn btn-outline-success">Изменить</button>
+    <button id="editButton" type="submit" class="btn btn-outline-success">Изменить</button>
 </form>
 <!-- button for all copies -->
 <form th:action="@{/films/{id}(id=${film.getId()})}" method="post">
-    <button type="submit" class="btn btn-outline-success">Все копии</button>
+    <button id="copyButton" type="submit" class="btn btn-outline-success">Все копии</button>
 </form>
 <!-- button for disk copies -->
 <form th:action="@{/copies/filtered/disk-{id}(id=${film.getId()})}" method="get">
-    <button type="submit" class="btn btn-outline-success">Показать диски</button>
+    <button id="diskButton" type="submit" class="btn btn-outline-success">Показать диски</button>
 </form>
 <!-- button for cassettes copies -->
 <form th:action="@{/copies/filtered/cassette-{id}(id=${film.getId()})}" method="get">
-    <button type="submit" class="btn btn-outline-success">Показать кассеты</button>
+    <button id="cassetteButton" type="submit" class="btn btn-outline-success">Показать кассеты</button>
+</form>
+<!-- button for new copy -->
+<form th:action="@{/copies/new-{id}(id=${film.getId()})}" method="get">
+    <button id="createCopyButton" type="submit" class="btn btn-outline-success">Создать</button>
 </form>
 </body>
 </html>

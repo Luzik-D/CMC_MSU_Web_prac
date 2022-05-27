@@ -6,13 +6,13 @@
         crossorigin="anonymous">
 
   <meta charset="UTF-8">
-  <title>Клиенты</title>
+  <title>Редактирование клиента</title>
 </head>
 <body>
 <!-- Navigation Panel -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Клиенты</a>
+    <a id="toMainPage" class="navbar-brand" href="/clients">Клиенты</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -28,12 +28,12 @@
   </div>
 </nav>
 <!-- Create form-->
-<h1>Обновить клиента</h1>
+<h1>Редактирование клиента</h1>
 <form th:action="@{/clients/{id}(id=${client.getId()})}" th:object="${client}" th:method="PATCH">
-  <p>ФИО: <input type="text" th:field="*{name}"/></p>
-  <p>Телефон: <input type="text" th:field="*{phone}"/></p>
-  <p>Адрес: <input type="text" th:field="*{address}"/></p>
-  <p><input type="submit" value="Подтвердить"/></p>
+  <p>ФИО: <input id="clientName" type="text" th:field="*{name}"/></p>
+  <p>Телефон: <input id="clientPhone" type="text" th:field="*{phone}"/></p>
+  <p>Адрес: <input id="clientAddress" type="text" th:field="*{address}"/></p>
+  <button id="editButton" type="submit" class="btn btn-outline-secondary">Найти</button>
 </form>
 </body>
 </html>

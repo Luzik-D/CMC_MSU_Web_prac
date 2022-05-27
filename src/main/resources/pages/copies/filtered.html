@@ -6,13 +6,13 @@
           crossorigin="anonymous">
 
     <meta charset="UTF-8">
-    <title>Фильтр</title>
+    <title>Список носителей</title>
 </head>
 <body>
 <!-- Navigation Panel -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Фильмы</a>
+        <a id="toMainPage" class="navbar-brand" href="/">Фильмы</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -30,7 +30,7 @@
 <!-- get copies -->
 <div class="list-group">
     <div th:each="copy : ${filmCopies}">
-        <a th:href="@{/copies/{id}(id=${copy.getId()})}" class="list-group-item list-group-item-action" th:text="${copy.getId()}">copy</a>
+        <a id="copyId" th:href="@{/copies/{id}(id=${copy.getId()})}" class="list-group-item list-group-item-action" th:text="${copy.getId()}">copy</a>
     </div>
 </div>
 </body>

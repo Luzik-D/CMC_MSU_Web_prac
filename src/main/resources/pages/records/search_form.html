@@ -6,13 +6,13 @@
           crossorigin="anonymous">
 
     <meta charset="UTF-8">
-    <title>record</title>
+    <title>История транзакций</title>
 </head>
 <body>
 <!-- Navigation Panel -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">История транзакций</a>
+        <a class="navbar-brand" href="/records">История транзакций</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -29,12 +29,11 @@
 </nav>
 <!-- Search form -->
 <h1>Поиск транзакции</h1>
-<!--<form action="#" th:action="@{/films/filtered}" th:object="${filter}" method="post">
-    <p>Название: <input type="text" th:field="*{title}"/></p>
-    <p>Компания: <input type="text" th:field="*{company}"/></p>
-    <p>Режиссер: <input type="text" th:field="*{director}"/></p>
-    <p>Год выпуска: <input type="text" th:field="*{yearOfRelease}"/></p>
-    <p><input type="submit" value="Найти"/></p>
-</form>-->
+<form th:action="@{/records}" th:object="${record}" method="post">
+    <p>ФИО: <input id="clientName" type="text" th:field="*{name}"/></p>
+    <p>Телефон: <input id="clientPhone" type="text" th:field="*{phone}"/></p>
+    <p>Дата транзакции: <input id="date" type="text" th:field="*{address}"/></p>
+    <p><input id="searchButton" type="submit" value="Найти"/></p>
+</form>
 </body>
 </html>

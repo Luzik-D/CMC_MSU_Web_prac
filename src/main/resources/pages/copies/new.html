@@ -6,19 +6,19 @@
         crossorigin="anonymous">
 
   <meta charset="UTF-8">
-  <title>Отфильтрованные фильмы</title>
+  <title>Создание носителя</title>
 </head>
 <body>
 <!-- Navigation Panel -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a id="toMainPage" class="navbar-brand" href="/">Фильмы</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="/clients">Клиенты</a>
+        <a class="nav-link" href="/">Фильмы</a>
+        <a class="nav-link" href="/clients">Клиенты</a>
         <!-- make info pages -->
         <a class="nav-link" href="/records">История транзакций</a>
         <a class="nav-link" href="#">Информация</a>
@@ -27,20 +27,12 @@
     </div>
   </div>
 </nav>
-<!-- Search form -->
-<!-- https://spring-projects.ru/guides/handling-form-submission -->
-<!-- get all films -->
-<div class="list-group">
-  <div th:if="${filteredFilms.size()} != 0">
-    <div th:each="film : ${filteredFilms}">
-      <!--<a th:href="@{/films/{id}(id=${film.getId()})}" th:text="${film.getTitle()}">film</a>-->
-      <a id="refId" th:href="@{/films/{id}(id=${film.getId()})}" class="list-group-item list-group-item-action" th:text="${film.getTitle()}">film</a>
-    </div>
-  </div>
-  <div th:if="${filteredFilms.size()} == 0">
-    Не найдено
-  </div>
-
-</div>
+<h1>Создать копию фильма</h1>
+<form th:action="@{/copies/new-{id}(id=${newCopy.getFilm().getId()})}" th:object="${newCopy}" th:method="post">
+  <p>Тип: <input id="copyType" type="text" th:field="*{type}"/></p>
+  <p>Статус: <input id="copyStatus" type="text" th:field="*{status}"/></p>
+  <p>Цена: <input id="copyPrice" type="text" th:field="*{price}"/></p>
+  <p><input id="createButton" type="submit" value="Подтвердить"/></p>
+</form>
 </body>
 </html>

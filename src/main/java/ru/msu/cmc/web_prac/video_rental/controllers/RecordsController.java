@@ -11,6 +11,7 @@ import ru.msu.cmc.web_prac.video_rental.DAO.Impl.ClientHistoryRecordImpl;
 import ru.msu.cmc.web_prac.video_rental.tables.Client;
 import ru.msu.cmc.web_prac.video_rental.tables.ClientHistoryRecord;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -25,7 +26,6 @@ public class RecordsController {
     @GetMapping()
     public String searchForm(Model model) {
         model.addAttribute("record", new Client());
-        model.addAttribute("transactionDate", new String[8]); //field for transaction date
 
         return "/records/search_form";
     }
@@ -36,11 +36,32 @@ public class RecordsController {
                                                                       null, null));
         return "records/show";
     }
-    @PostMapping("/client-{id}")
-    public String getClientRecords(@PathVariable("id") Integer id,
-                                   @ModelAttribute("record") ClientHistoryRecord clientRecords,
-                                   @ModelAttribute("transactionDate") String date) {
 
-        return "records/show";
+    /*
+     * Form for searching client transaction records
+     * into address field sends date of transaction
+     */
+    @PostMapping()
+    public String getClientRecords(@ModelAttribute("record") Client client, Model model) {
+        List<ClientHistoryRecord> recordList = new ArrayList<>();
+        //get clients by name
+        List<Client> clientList = clientDAO.findClient(client.getName(), client.getPhone(), null);
+        if(clientList.size() == 0) {
+            //no clients
+            model.addAttribute("filteredRecords", recordList);
+            return "/records/filtered";
+        }
+        for(int i = 0; i < clientList.size(); i++) {
+            recordList.addAll(recordDAO.findRecord(clientList.get(i).getId(), null, client.getAddress(), null, null, null));
+        }
+        System.out.printf("found records " + recordList.size());
+        for(int i = 0; i < recordList.size(); i++) {
+            System.out.printf("client " + recordList.get(i).getClient().getName() + "\n");
+        }
+
+
+        model.addAttribute("filteredRecords", recordList);
+
+        return "records/filtered";
     }
 }

@@ -1,8 +1,10 @@
 package ru.msu.cmc.web_prac.video_rental.tables;
 
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.List;
 
 /* TABLE "Film" INTO JAVA CLASS */
 
@@ -33,6 +35,8 @@ public class Film implements AbstractTable {
 
     @Column(name = "description", nullable = false)
     private String description;
+
+
 
     //constructor to insert (without id)
     public Film(String title, String company, String director, String yearOfRelease, String description) {

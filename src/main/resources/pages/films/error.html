@@ -6,13 +6,13 @@
           crossorigin="anonymous">
 
     <meta charset="UTF-8">
-    <title>Фильтр</title>
+    <title>Ошибка</title>
 </head>
 <body>
 <!-- Navigation Panel -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a id="toMainPage" class="navbar-brand" href="/">Фильмы</a>
+        <a class="navbar-brand" href="/">Фильмы</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,13 +26,24 @@
             </div>
         </div>
     </div>
-</nav>
-hello cassette
-<!-- get copies -->
-<div class="list-group">
-    <div th:each="copy : ${filteredCassettes}">
-        <a id="cassetteId" th:href="@{/copies/{id}(id=${copy.getId()})}" class="list-group-item list-group-item-action" th:text="${copy.getId()}">copy</a>
-    </div>
+</nav>>
+
+<h1>Ошибка</h1>
+
+<div th:if="${errorFilm.getTitle().isEmpty}">
+    Не указано название фильма.
+</div>
+<div th:if="${errorFilm.getCompany().isEmpty}">
+    Не указана компания.
+</div>
+<div th:if="${errorFilm.getDirector().isEmpty}">
+    Не указан режиссер фильма.
+</div>
+<div th:if="${errorFilm.getYearOfRelease().isEmpty}">
+    Не указан год выпуска фильма.
+</div>
+<div th:if="${errorFilm.getYearOfRelease().length()} > 4">
+    Год указан некорректно.
 </div>
 </body>
 </html>

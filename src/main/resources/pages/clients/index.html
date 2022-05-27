@@ -12,7 +12,7 @@
 <!-- Navigation Panel -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Клиенты</a>
+        <a class="navbar-brand" href="/">Клиенты</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -30,20 +30,20 @@
 <!-- Search form -->
 <h1>Поиск клиента</h1>
 <form action="#" th:action="@{/clients/filtered}" th:object="${filter}" method="post">
-    <p>ФИО: <input type="text" th:field="*{name}"/></p>
-    <p>Телефон: <input type="text" th:field="*{phone}"/></p>
-    <p>Адрес: <input type="text" th:field="*{address}"/></p>
-    <button type="submit" class="btn btn-outline-secondary">Найти</button>
+    <p>ФИО: <input id="clientName" type="text" th:field="*{name}"/></p>
+    <p>Телефон: <input id="clientPhone" type="text" th:field="*{phone}"/></p>
+    <p>Адрес: <input id="clientAddress" type="text" th:field="*{address}"/></p>
+    <button id="searchButton" type="submit" class="btn btn-outline-secondary">Найти</button>
 </form>
 <!-- get all clients -->
 <div class="list-group">
     <div th:each="client : ${clients}">
-        <a th:href="@{/clients/{id}(id=${client.getId()})}" class="list-group-item list-group-item-action" th:text="${client.getName()}">client</a>
+        <a id="clientId" th:href="@{/clients/{id}(id=${client.getId()})}" class="list-group-item list-group-item-action" th:text="${client.getName()}">client</a>
     </div>
 </div>
 <!-- button for create client -->
 <form method="get" action="clients/new">
-    <button type="submit" class="btn btn-outline-success">Создать</button>
+    <button id="createButton" type="submit" class="btn btn-outline-success">Создать</button>
 </form>
 </body>
 </html>
