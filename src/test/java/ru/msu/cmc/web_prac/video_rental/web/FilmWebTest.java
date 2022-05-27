@@ -13,8 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class FilmWebTest {
     private final String filmTitle = "Фильмы";
     private final String filteredFilmsTitle = "Отфильтрованные фильмы";
-    private final String clientTitle = "Клиенты";
-    private final String recordTitle = "Транзакции";
 
     @Test
     void filmsTest() {

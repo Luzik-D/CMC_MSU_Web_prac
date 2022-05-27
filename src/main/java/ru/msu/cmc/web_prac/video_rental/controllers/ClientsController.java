@@ -112,7 +112,8 @@ public class ClientsController {
     }
 
     @PatchMapping("/{id}")
-    public String updateClient(@ModelAttribute("client") Client client, Model model) {
+    public String updateClient(@PathVariable("id") Integer id,
+                               @ModelAttribute("client") Client client, Model model) {
         //error cases
         if(
             client.getName().isEmpty() ||
@@ -125,7 +126,9 @@ public class ClientsController {
         }
 
         //phone number is not unique
-        if(clientDAO.findClient(null, client.getPhone(), null).size() > 0) {
+        System.out.printf("PHONE " + clientDAO.getById(id).getPhone() + '\n');
+        if(clientDAO.findClient(null, client.getPhone(), null).size() > 0 &&
+           !clientDAO.getById(id).getPhone().equals(client.getPhone())) {
             model.addAttribute("uniqueError", 1);
             return "clients/unique_error";
         }
