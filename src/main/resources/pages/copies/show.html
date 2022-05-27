@@ -6,7 +6,7 @@
           crossorigin="anonymous">
 
     <meta charset="UTF-8">
-    <title>Копии</title>
+    <title>Копия</title>
 </head>
 <body>
 <!-- Navigation Panel -->
@@ -36,16 +36,16 @@ copy
 <p th:text="'Цена: ' + ${copy.getPrice()}"></p>
 <!-- button for delete -->
 <form th:action="@{/copies/{id}(id=${copy.getId()})}" th:method="DELETE">
-    <input type="submit" value="Удалить"/>
+    <input id="deleteButton" type="submit" value="Удалить"/>
 </form>
 <!-- button for update -->
 <form th:action="@{/copies/{id}/edit(id=${copy.getId()})}" method="get">
-    <button type="submit" class="btn btn-outline-success">Изменить</button>
+    <button id="editButton" type="submit" class="btn btn-outline-success">Изменить</button>
 </form>
 <!-- button for order -->
 <form th:action="@{/copies/order-{id}/(id=${copy.getId()})}" method="get">
     <div th:if="${copy.getStatus} != 'Используется'">
-        <button type="submit" class="btn btn-outline-success">Заказать копию</button>
+        <button id="orderButton" type="submit" class="btn btn-outline-success">Заказать копию</button>
     </div>
 </form>
 </body>

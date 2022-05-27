@@ -183,8 +183,8 @@ public class CopiesController {
 
         copyDAO.update(copy);
         recordDAO.save(record);
-
-        return "redirect:/copies";
+        id = clientList.get(0).getId();
+        return "redirect:/clients/" + id;
     }
 }
 

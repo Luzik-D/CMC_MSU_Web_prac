@@ -6,7 +6,7 @@
           crossorigin="anonymous">
 
     <meta charset="UTF-8">
-    <title>Копии</title>
+    <title>Оформление заказа</title>
 </head>
 <body>
 <!-- Navigation Panel -->
@@ -30,10 +30,10 @@
 <h1>Заказать копию</h1>
 <form th:action="@{/copies/order-{id}(id=${orderCopy.getId()})}" th:object="${transaction}" method="post">
     <p th:text="'Вы заказываете Фильм: ' + ${orderCopy.getFilm().getId()}"></p>
-    <p>Телефон: <input type="text" th:field="*{clientPhone}"/></p>
-    <p>Дата: <input type="text" th:field="*{date}"/></p>
+    <p>Телефон: <input id="clientPhone" type="text" th:field="*{clientPhone}"/></p>
+    <p>Дата: <input id="date" type="text" th:field="*{date}"/></p>
     <p th:text="'К оплате: ' + ${orderCopy.getPrice()} + 'руб.'"</p>
-    <p><input type="submit" value="Заказать"></p>
+    <p><input id="orderButton" type="submit" value="Заказать"></p>
 </form>
 </body>
 </html>

@@ -18,7 +18,7 @@ public class FilmWebTest {
     void filmsTest() {
         System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
         WebDriver driver = new FirefoxDriver();
-        driver.manage().window().setPosition(new Point(0, 0));
+        //driver.manage().window().setPosition(new Point(0, 0));
         driver.manage().window().setSize(new Dimension(1024, 768));
         driver.get("http://localhost:8080/");
 
