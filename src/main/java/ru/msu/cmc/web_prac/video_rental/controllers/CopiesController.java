@@ -123,20 +123,31 @@ public class CopiesController {
 
     }
     @PatchMapping("/{id}")
-    public String updateCopy(@PathVariable("id") Integer id, @ModelAttribute("copy") Copy copy) {
+    public String updateCopy(@PathVariable("id") Integer id, @ModelAttribute("copy") Copy copy, Model model) {
         //save film id (we can't change film_id of copy)
         Copy filmCopy = copyDAO.getById(id);
         copy.setFilm(filmCopy.getFilm());
+        Integer price = copy.getPrice();
+        if(
+            copy.getStatus().isEmpty() ||
+            copy.getType().isEmpty() ||
+            price == null
+        ) {
+            model.addAttribute("errorCopy", copy);
+            model.addAttribute("price", price);
+            return "copies/error";
+        }
         copyDAO.update(copy);
 
-        return "redirect:/copies";
+        return "redirect:/films/" + copy.getFilm().getId().toString();
     }
 
     @DeleteMapping("/{id}")
     public String deleteCopy(@PathVariable("id") Integer id) {
+        Integer filmId = copyDAO.getById(id).getFilm().getId();
         copyDAO.delete(copyDAO.getById(id));
 
-        return "redirect:/copies";
+        return "redirect:/films/" + filmId.toString();
     }
 
     /* * * * * * * * * * * * * * * * * *
@@ -159,7 +170,7 @@ public class CopiesController {
                             @ModelAttribute("transaction") TransactionObject transaction, Model model) {
 
         List<Client> clientList = clientDAO.getClientByPhone(transaction.getClientPhone());
-        if(clientList == null) {
+        if(clientList == null || transaction.getDate().length() != 10) {
             // no client
             return "copies/order_error";
         }

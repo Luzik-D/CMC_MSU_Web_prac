@@ -6,7 +6,7 @@
         crossorigin="anonymous">
 
   <meta charset="UTF-8">
-  <title>Копии</title>
+  <title>Редактирование носителя</title>
 </head>
 <body>
 <!-- Navigation Panel -->
@@ -29,10 +29,10 @@
 </nav>
 <h1>Изменить копию</h1>
 <form th:action="@{/copies/{id}(id=${copy.getId()})}" th:object="${copy}" th:method="PATCH">
-  <p>Тип: <input type="text" th:field="*{type}"/></p>
-  <p>Статус: <input type="text" th:field="*{status}"/></p>
-  <p>Цена: <input type="text" th:field="*{price}"/></p>
-  <p><input type="submit" value="Подтвердить"/></p>
+  <p>Тип: <input id="copyType" type="text" th:field="*{type}"/></p>
+  <p>Статус: <input id="copyStatus" type="text" th:field="*{status}"/></p>
+  <p>Цена: <input id="copyPrice" type="text" th:field="*{price}"/></p>
+  <p><input id="editButton" type="submit" value="Подтвердить"/></p>
 </form>
 </body>
 </html>
